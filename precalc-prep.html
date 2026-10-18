@@ -909,6 +909,7 @@ html[data-theme="dark"] #mpg-search,html[data-theme="dark"] .mpg-pick select,htm
 .st-table th,.st-table td{border:1px solid var(--line);padding:.3rem .45rem;text-align:center;white-space:nowrap}
 .st-table th{background:var(--soft);font:700 .76rem/1.3 Arial,sans-serif}
 .st-table td.st-blank{color:var(--muted)}
+.st-th{font-family:"Times New Roman",Times,"DejaVu Serif",serif;font-style:normal;font-size:1.12em;line-height:1}
 .st-stepbox{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.7rem}
 .st-stephead{display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap}
 .st-stepno{font:700 .76rem/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--accent)}
@@ -6576,7 +6577,7 @@ sec 300° = 1/(1/2) = 2</div></li>
 <div class="step"><span class="step-num">2</span>Compute amplitude and period.</div>
 <div class="step"><span class="step-num">3</span>Find phase shift and midline.</div>
 <div class="step"><span class="step-num">4</span>Mark one period and the key quarter-points.</div>
-<div class="calc-box"><strong>TI-30XIIS:</strong> use it to check trig values; it does not graph.</div></div><div class="shortcut"><strong>Five-point sine/cosine graph shortcut.</strong> Once you know the phase shift and period, compute <code>period ÷ 4</code>. Starting at the phase shift, mark five x-values one quarter-period apart. For sine, the parent y-pattern is <code>0, 1, 0, -1, 0</code>; for cosine it is <code>1, 0, -1, 0, 1</code>. Multiply by <code>A</code> and then add <code>D</code>. This produces one full cycle quickly and reliably.</div><h3>Two forms of the same equation</h3><div class="warning"><strong>Read the form before you read the phase shift.</strong><br/>
+<div class="calc-box"><strong>TI-30XIIS:</strong> use it to check trig values; it does not graph.</div></div><div class="shortcut"><strong>Five-point sine/cosine graph shortcut.</strong> Once you know the phase shift and period, compute <code>period ÷ 4</code>. Starting at the phase shift, mark five x-values one quarter-period apart. For sine, the parent y-pattern is <code>0, 1, 0, -1, 0</code>; for cosine it is <code>1, 0, -1, 0, 1</code>. Multiply by <code>A</code> and then add <code>D</code>. This produces one full cycle quickly and reliably.<br/><strong>Parent table instead:</strong> make four columns, parent x (<code>θ = 0, π/2, π, 3π/2, 2π</code>), parent y (the pattern above), new x and new y. Then apply the transformations to every row: <code>new x = θ/B + phase shift</code> (stretch/shrink, then shift) and <code>new y = A·(parent y) + D</code> (stretch/reflect, then shift). For <code>y = sin(3/4x - 4) + 4</code>: <code>new x = θ ÷ (3/4) + 16/3</code>, <code>new y = parent y + 4</code>.</div><h3>Two forms of the same equation</h3><div class="warning"><strong>Read the form before you read the phase shift.</strong><br/>
 In <code>y = A sin(B(x - C)) + D</code> the phase shift is <code>C</code>.<br/>
 In <code>y = A sin(Bx - C) + D</code> the phase shift is <code>C/B</code>.<br/>
 If B is not already factored out, factor it out first. Skipping this is the single most common error
@@ -6609,6 +6610,17 @@ Step 3  Quarter-point spacing = period/4 = π/4.
           x = π         y = 1 + 0  = 1     (midline)
           x = 5π/4      y = 1 - 3  = -2    (minimum)
           x = 3π/2      y = 1 + 0  = 1     (back to start of next cycle)
+
+Or with a parent table. Apply the transformations to each row:
+        new x = θ/2 + π/2      (shrink by B = 2, then shift right π/2)
+        new y = 3·(parent y) + 1   (stretch by 3, then up 1)
+
+          parent x (θ)   parent y   new x    new y
+          0               0         π/2       1
+          π/2             1         3π/4      4
+          π               0         π         1
+          3π/2           -1         5π/4     -2
+          2π              0         3π/2      1
 
 Range: [-2, 4]</div>
 <div class="mistake-box"><strong>If you had read C = π</strong> straight off the unfactored form, your
@@ -10036,23 +10048,23 @@ Step 6  Match to y = A sin(B(x − C)) + D.
 </ul>
 <p><b>Rules for the table:</b></p>
 <ul>
-<li>new x = old x ÷ B = old x ÷ (1/2) = <b>2 · old x</b></li>
-<li>new y = A · old y + D = <b>−(3/2) · old y − 2</b></li>
+<li>new x = parent x ÷ B = parent x ÷ (1/2) = <b>2 · parent x</b></li>
+<li>new y = A · parent y + D = <b>−(3/2) · parent y − 2</b></li>
 </ul>
 </div><div>
 <table class="cs-oldnew">
-<tr><th>old x</th><th>old y</th><th>new x</th><th>new y</th></tr>
+<tr><th>parent x (θ)</th><th>parent y</th><th>new x</th><th>new y</th></tr>
 <tr><td>0</td><td>1</td><td>0</td><td>−7/2 &nbsp;minimum</td></tr>
 <tr><td>π/2</td><td>0</td><td>π</td><td>−2 &nbsp;midline</td></tr>
 <tr><td>π</td><td>−1</td><td>2π</td><td>−1/2 &nbsp;maximum</td></tr>
 <tr><td>3π/2</td><td>0</td><td>3π</td><td>−2 &nbsp;midline</td></tr>
 <tr><td>2π</td><td>1</td><td>4π</td><td>−7/2 &nbsp;minimum</td></tr>
 </table>
-<p>The old columns are the five key points of the parent y = cos x. The new columns are where those points land: the minima, the maximum and the midline crossings for one cycle, 0 ≤ x ≤ 4π.</p>
+<p>The parent columns are the five key points of y = cos θ. The new columns are where those points land: the minima, the maximum and the midline crossings for one cycle, 0 ≤ x ≤ 4π.</p>
 </div></div>
 <figure class="cs-fig "><svg class="csf csf-gr" viewBox="0 0 720 330" role="img" aria-label="Graph of y = -3/2 cos(x/2) - 2 from -pi to 4pi with the parent cosine dashed" xmlns="http://www.w3.org/2000/svg"><line x1="34" y1="300" x2="34" y2="12" class="csf-grid csf-grid-major"/><line x1="101.2" y1="300" x2="101.2" y2="12" class="csf-grid"/><line x1="168.4" y1="300" x2="168.4" y2="12" class="csf-grid csf-grid-major"/><line x1="235.6" y1="300" x2="235.6" y2="12" class="csf-grid"/><line x1="302.8" y1="300" x2="302.8" y2="12" class="csf-grid csf-grid-major"/><line x1="370" y1="300" x2="370" y2="12" class="csf-grid"/><line x1="437.2" y1="300" x2="437.2" y2="12" class="csf-grid csf-grid-major"/><line x1="504.4" y1="300" x2="504.4" y2="12" class="csf-grid"/><line x1="571.6" y1="300" x2="571.6" y2="12" class="csf-grid csf-grid-major"/><line x1="638.8" y1="300" x2="638.8" y2="12" class="csf-grid"/><line x1="706" y1="300" x2="706" y2="12" class="csf-grid csf-grid-major"/><line x1="34" y1="300" x2="706" y2="300" class="csf-grid"/><line x1="34" y1="264" x2="706" y2="264" class="csf-grid"/><line x1="34" y1="228" x2="706" y2="228" class="csf-grid"/><line x1="34" y1="192" x2="706" y2="192" class="csf-grid"/><line x1="34" y1="156" x2="706" y2="156" class="csf-grid"/><line x1="34" y1="120" x2="706" y2="120" class="csf-grid"/><line x1="34" y1="84" x2="706" y2="84" class="csf-grid"/><line x1="34" y1="48" x2="706" y2="48" class="csf-grid"/><line x1="34" y1="12" x2="706" y2="12" class="csf-grid"/><line x1="34" y1="156" x2="706" y2="156" class="csf-ax"/><line x1="168.4" y1="300" x2="168.4" y2="12" class="csf-ax"/><text x="34" y="171" text-anchor="middle" class="csf-tick">−π</text><text x="101.2" y="171" text-anchor="middle" class="csf-tick">−π/2</text><text x="235.6" y="171" text-anchor="middle" class="csf-tick">π/2</text><text x="302.8" y="171" text-anchor="middle" class="csf-tick">π</text><text x="370" y="171" text-anchor="middle" class="csf-tick">3π/2</text><text x="437.2" y="171" text-anchor="middle" class="csf-tick">2π</text><text x="504.4" y="171" text-anchor="middle" class="csf-tick">5π/2</text><text x="571.6" y="171" text-anchor="middle" class="csf-tick">3π</text><text x="638.8" y="171" text-anchor="middle" class="csf-tick">7π/2</text><text x="706" y="171" text-anchor="middle" class="csf-tick">4π</text><text x="163.4" y="304" text-anchor="end" class="csf-tick">−4</text><text x="163.4" y="268" text-anchor="end" class="csf-tick">−3</text><text x="163.4" y="232" text-anchor="end" class="csf-tick">−2</text><text x="163.4" y="196" text-anchor="end" class="csf-tick">−1</text><text x="163.4" y="124" text-anchor="end" class="csf-tick">1</text><text x="163.4" y="88" text-anchor="end" class="csf-tick">2</text><text x="163.4" y="52" text-anchor="end" class="csf-tick">3</text><text x="163.4" y="16" text-anchor="end" class="csf-tick">4</text><polyline points="34,192 35.7,192 37.4,191.9 39,191.8 40.7,191.6 42.4,191.3 44.1,191 45.8,190.6 47.4,190.2 49.1,189.8 50.8,189.3 52.5,188.7 54.2,188.1 55.8,187.4 57.5,186.7 59.2,185.9 60.9,185.1 62.6,184.3 64.2,183.4 65.9,182.4 67.6,181.5 69.3,180.4 71,179.4 72.6,178.3 74.3,177.2 76,176 77.7,174.8 79.4,173.6 81,172.3 82.7,171.1 84.4,169.8 86.1,168.5 87.8,167.1 89.4,165.8 91.1,164.4 92.8,163 94.5,161.6 96.2,160.2 97.8,158.8 99.5,157.4 101.2,156 102.9,154.6 104.6,153.2 106.2,151.8 107.9,150.4 109.6,149 111.3,147.6 113,146.2 114.6,144.9 116.3,143.5 118,142.2 119.7,140.9 121.4,139.7 123,138.4 124.7,137.2 126.4,136 128.1,134.8 129.8,133.7 131.4,132.6 133.1,131.6 134.8,130.5 136.5,129.6 138.2,128.6 139.8,127.7 141.5,126.9 143.2,126.1 144.9,125.3 146.6,124.6 148.2,123.9 149.9,123.3 151.6,122.7 153.3,122.2 155,121.8 156.6,121.4 158.3,121 160,120.7 161.7,120.4 163.4,120.2 165,120.1 166.7,120 168.4,120 170.1,120 171.8,120.1 173.4,120.2 175.1,120.4 176.8,120.7 178.5,121 180.2,121.4 181.8,121.8 183.5,122.2 185.2,122.7 186.9,123.3 188.6,123.9 190.2,124.6 191.9,125.3 193.6,126.1 195.3,126.9 197,127.7 198.6,128.6 200.3,129.6 202,130.5 203.7,131.6 205.4,132.6 207,133.7 208.7,134.8 210.4,136 212.1,137.2 213.8,138.4 215.4,139.7 217.1,140.9 218.8,142.2 220.5,143.5 222.2,144.9 223.8,146.2 225.5,147.6 227.2,149 228.9,150.4 230.6,151.8 232.2,153.2 233.9,154.6 235.6,156 237.3,157.4 239,158.8 240.6,160.2 242.3,161.6 244,163 245.7,164.4 247.4,165.8 249,167.1 250.7,168.5 252.4,169.8 254.1,171.1 255.8,172.3 257.4,173.6 259.1,174.8 260.8,176 262.5,177.2 264.2,178.3 265.8,179.4 267.5,180.4 269.2,181.5 270.9,182.4 272.6,183.4 274.2,184.3 275.9,185.1 277.6,185.9 279.3,186.7 281,187.4 282.6,188.1 284.3,188.7 286,189.3 287.7,189.8 289.4,190.2 291,190.6 292.7,191 294.4,191.3 296.1,191.6 297.8,191.8 299.4,191.9 301.1,192 302.8,192 304.5,192 306.2,191.9 307.8,191.8 309.5,191.6 311.2,191.3 312.9,191 314.6,190.6 316.2,190.2 317.9,189.8 319.6,189.3 321.3,188.7 323,188.1 324.6,187.4 326.3,186.7 328,185.9 329.7,185.1 331.4,184.3 333,183.4 334.7,182.4 336.4,181.5 338.1,180.4 339.8,179.4 341.4,178.3 343.1,177.2 344.8,176 346.5,174.8 348.2,173.6 349.8,172.3 351.5,171.1 353.2,169.8 354.9,168.5 356.6,167.1 358.2,165.8 359.9,164.4 361.6,163 363.3,161.6 365,160.2 366.6,158.8 368.3,157.4 370,156 371.7,154.6 373.4,153.2 375,151.8 376.7,150.4 378.4,149 380.1,147.6 381.8,146.2 383.4,144.9 385.1,143.5 386.8,142.2 388.5,140.9 390.2,139.7 391.8,138.4 393.5,137.2 395.2,136 396.9,134.8 398.6,133.7 400.2,132.6 401.9,131.6 403.6,130.5 405.3,129.6 407,128.6 408.6,127.7 410.3,126.9 412,126.1 413.7,125.3 415.4,124.6 417,123.9 418.7,123.3 420.4,122.7 422.1,122.2 423.8,121.8 425.4,121.4 427.1,121 428.8,120.7 430.5,120.4 432.2,120.2 433.8,120.1 435.5,120 437.2,120 438.9,120 440.6,120.1 442.2,120.2 443.9,120.4 445.6,120.7 447.3,121 449,121.4 450.6,121.8 452.3,122.2 454,122.7 455.7,123.3 457.4,123.9 459,124.6 460.7,125.3 462.4,126.1 464.1,126.9 465.8,127.7 467.4,128.6 469.1,129.6 470.8,130.5 472.5,131.6 474.2,132.6 475.8,133.7 477.5,134.8 479.2,136 480.9,137.2 482.6,138.4 484.2,139.7 485.9,140.9 487.6,142.2 489.3,143.5 491,144.9 492.6,146.2 494.3,147.6 496,149 497.7,150.4 499.4,151.8 501,153.2 502.7,154.6 504.4,156 506.1,157.4 507.8,158.8 509.4,160.2 511.1,161.6 512.8,163 514.5,164.4 516.2,165.8 517.8,167.1 519.5,168.5 521.2,169.8 522.9,171.1 524.6,172.3 526.2,173.6 527.9,174.8 529.6,176 531.3,177.2 533,178.3 534.6,179.4 536.3,180.4 538,181.5 539.7,182.4 541.4,183.4 543,184.3 544.7,185.1 546.4,185.9 548.1,186.7 549.8,187.4 551.4,188.1 553.1,188.7 554.8,189.3 556.5,189.8 558.2,190.2 559.8,190.6 561.5,191 563.2,191.3 564.9,191.6 566.6,191.8 568.2,191.9 569.9,192 571.6,192 573.3,192 575,191.9 576.6,191.8 578.3,191.6 580,191.3 581.7,191 583.4,190.6 585,190.2 586.7,189.8 588.4,189.3 590.1,188.7 591.8,188.1 593.4,187.4 595.1,186.7 596.8,185.9 598.5,185.1 600.2,184.3 601.8,183.4 603.5,182.4 605.2,181.5 606.9,180.4 608.6,179.4 610.2,178.3 611.9,177.2 613.6,176 615.3,174.8 617,173.6 618.6,172.3 620.3,171.1 622,169.8 623.7,168.5 625.4,167.1 627,165.8 628.7,164.4 630.4,163 632.1,161.6 633.8,160.2 635.4,158.8 637.1,157.4 638.8,156 640.5,154.6 642.2,153.2 643.8,151.8 645.5,150.4 647.2,149 648.9,147.6 650.6,146.2 652.2,144.9 653.9,143.5 655.6,142.2 657.3,140.9 659,139.7 660.6,138.4 662.3,137.2 664,136 665.7,134.8 667.4,133.7 669,132.6 670.7,131.6 672.4,130.5 674.1,129.6 675.8,128.6 677.4,127.7 679.1,126.9 680.8,126.1 682.5,125.3 684.2,124.6 685.8,123.9 687.5,123.3 689.2,122.7 690.9,122.2 692.6,121.8 694.2,121.4 695.9,121 697.6,120.7 699.3,120.4 701,120.2 702.6,120.1 704.3,120 706,120" class="csf-parent csf-nofill"/><line x1="34" y1="228" x2="706" y2="228" class="csf-hl2 csf-dash"/><polyline points="34,228 35.7,229.1 37.4,230.1 39,231.2 40.7,232.2 42.4,233.3 44.1,234.3 45.8,235.4 47.4,236.4 49.1,237.5 50.8,238.5 52.5,239.6 54.2,240.6 55.8,241.6 57.5,242.7 59.2,243.7 60.9,244.7 62.6,245.7 64.2,246.7 65.9,247.7 67.6,248.7 69.3,249.6 71,250.6 72.6,251.6 74.3,252.5 76,253.5 77.7,254.4 79.4,255.3 81,256.2 82.7,257.1 84.4,258 86.1,258.9 87.8,259.7 89.4,260.6 91.1,261.4 92.8,262.3 94.5,263.1 96.2,263.9 97.8,264.7 99.5,265.4 101.2,266.2 102.9,266.9 104.6,267.7 106.2,268.4 107.9,269.1 109.6,269.7 111.3,270.4 113,271.1 114.6,271.7 116.3,272.3 118,272.9 119.7,273.5 121.4,274 123,274.6 124.7,275.1 126.4,275.6 128.1,276.1 129.8,276.6 131.4,277 133.1,277.5 134.8,277.9 136.5,278.3 138.2,278.7 139.8,279 141.5,279.4 143.2,279.7 144.9,280 146.6,280.3 148.2,280.5 149.9,280.7 151.6,281 153.3,281.2 155,281.3 156.6,281.5 158.3,281.6 160,281.7 161.7,281.8 163.4,281.9 165,282 166.7,282 168.4,282 170.1,282 171.8,282 173.4,281.9 175.1,281.8 176.8,281.7 178.5,281.6 180.2,281.5 181.8,281.3 183.5,281.2 185.2,281 186.9,280.7 188.6,280.5 190.2,280.3 191.9,280 193.6,279.7 195.3,279.4 197,279 198.6,278.7 200.3,278.3 202,277.9 203.7,277.5 205.4,277 207,276.6 208.7,276.1 210.4,275.6 212.1,275.1 213.8,274.6 215.4,274 217.1,273.5 218.8,272.9 220.5,272.3 222.2,271.7 223.8,271.1 225.5,270.4 227.2,269.7 228.9,269.1 230.6,268.4 232.2,267.7 233.9,266.9 235.6,266.2 237.3,265.4 239,264.7 240.6,263.9 242.3,263.1 244,262.3 245.7,261.4 247.4,260.6 249,259.7 250.7,258.9 252.4,258 254.1,257.1 255.8,256.2 257.4,255.3 259.1,254.4 260.8,253.5 262.5,252.5 264.2,251.6 265.8,250.6 267.5,249.6 269.2,248.7 270.9,247.7 272.6,246.7 274.2,245.7 275.9,244.7 277.6,243.7 279.3,242.7 281,241.6 282.6,240.6 284.3,239.6 286,238.5 287.7,237.5 289.4,236.4 291,235.4 292.7,234.3 294.4,233.3 296.1,232.2 297.8,231.2 299.4,230.1 301.1,229.1 302.8,228 304.5,226.9 306.2,225.9 307.8,224.8 309.5,223.8 311.2,222.7 312.9,221.7 314.6,220.6 316.2,219.6 317.9,218.5 319.6,217.5 321.3,216.4 323,215.4 324.6,214.4 326.3,213.3 328,212.3 329.7,211.3 331.4,210.3 333,209.3 334.7,208.3 336.4,207.3 338.1,206.4 339.8,205.4 341.4,204.4 343.1,203.5 344.8,202.5 346.5,201.6 348.2,200.7 349.8,199.8 351.5,198.9 353.2,198 354.9,197.1 356.6,196.3 358.2,195.4 359.9,194.6 361.6,193.7 363.3,192.9 365,192.1 366.6,191.3 368.3,190.6 370,189.8 371.7,189.1 373.4,188.3 375,187.6 376.7,186.9 378.4,186.3 380.1,185.6 381.8,184.9 383.4,184.3 385.1,183.7 386.8,183.1 388.5,182.5 390.2,182 391.8,181.4 393.5,180.9 395.2,180.4 396.9,179.9 398.6,179.4 400.2,179 401.9,178.5 403.6,178.1 405.3,177.7 407,177.3 408.6,177 410.3,176.6 412,176.3 413.7,176 415.4,175.7 417,175.5 418.7,175.3 420.4,175 422.1,174.8 423.8,174.7 425.4,174.5 427.1,174.4 428.8,174.3 430.5,174.2 432.2,174.1 433.8,174 435.5,174 437.2,174 438.9,174 440.6,174 442.2,174.1 443.9,174.2 445.6,174.3 447.3,174.4 449,174.5 450.6,174.7 452.3,174.8 454,175 455.7,175.3 457.4,175.5 459,175.7 460.7,176 462.4,176.3 464.1,176.6 465.8,177 467.4,177.3 469.1,177.7 470.8,178.1 472.5,178.5 474.2,179 475.8,179.4 477.5,179.9 479.2,180.4 480.9,180.9 482.6,181.4 484.2,182 485.9,182.5 487.6,183.1 489.3,183.7 491,184.3 492.6,184.9 494.3,185.6 496,186.3 497.7,186.9 499.4,187.6 501,188.3 502.7,189.1 504.4,189.8 506.1,190.6 507.8,191.3 509.4,192.1 511.1,192.9 512.8,193.7 514.5,194.6 516.2,195.4 517.8,196.3 519.5,197.1 521.2,198 522.9,198.9 524.6,199.8 526.2,200.7 527.9,201.6 529.6,202.5 531.3,203.5 533,204.4 534.6,205.4 536.3,206.4 538,207.3 539.7,208.3 541.4,209.3 543,210.3 544.7,211.3 546.4,212.3 548.1,213.3 549.8,214.4 551.4,215.4 553.1,216.4 554.8,217.5 556.5,218.5 558.2,219.6 559.8,220.6 561.5,221.7 563.2,222.7 564.9,223.8 566.6,224.8 568.2,225.9 569.9,226.9 571.6,228 573.3,229.1 575,230.1 576.6,231.2 578.3,232.2 580,233.3 581.7,234.3 583.4,235.4 585,236.4 586.7,237.5 588.4,238.5 590.1,239.6 591.8,240.6 593.4,241.6 595.1,242.7 596.8,243.7 598.5,244.7 600.2,245.7 601.8,246.7 603.5,247.7 605.2,248.7 606.9,249.6 608.6,250.6 610.2,251.6 611.9,252.5 613.6,253.5 615.3,254.4 617,255.3 618.6,256.2 620.3,257.1 622,258 623.7,258.9 625.4,259.7 627,260.6 628.7,261.4 630.4,262.3 632.1,263.1 633.8,263.9 635.4,264.7 637.1,265.4 638.8,266.2 640.5,266.9 642.2,267.7 643.8,268.4 645.5,269.1 647.2,269.7 648.9,270.4 650.6,271.1 652.2,271.7 653.9,272.3 655.6,272.9 657.3,273.5 659,274 660.6,274.6 662.3,275.1 664,275.6 665.7,276.1 667.4,276.6 669,277 670.7,277.5 672.4,277.9 674.1,278.3 675.8,278.7 677.4,279 679.1,279.4 680.8,279.7 682.5,280 684.2,280.3 685.8,280.5 687.5,280.7 689.2,281 690.9,281.2 692.6,281.3 694.2,281.5 695.9,281.6 697.6,281.7 699.3,281.8 701,281.9 702.6,282 704.3,282 706,282" class="csf-hl csf-nofill csf-thick"/><circle cx="168.4" cy="282" r="4.5" class="csf-dot-acc"/><text x="174.4" y="298" text-anchor="start" class="csf-lab">(0, −7/2) min</text><circle cx="302.8" cy="228" r="4.5" class="csf-dot-acc"/><text x="308.8" y="244" text-anchor="start" class="csf-lab">(π, −2)</text><circle cx="437.2" cy="174" r="4.5" class="csf-dot-acc"/><text x="437.2" y="140.9" text-anchor="middle" class="csf-lab">(2π, −1/2) max</text><circle cx="571.6" cy="228" r="4.5" class="csf-dot-acc"/><text x="577.6" y="244" text-anchor="start" class="csf-lab">(3π, −2)</text><circle cx="706" cy="282" r="4.5" class="csf-dot-acc"/><text x="700" y="298" text-anchor="end" class="csf-lab">(4π, −7/2) min</text><text x="702" y="222" text-anchor="end" class="csf-cap">midline y = −2</text><text x="38" y="114" text-anchor="start" class="csf-cap">parent y = cos x</text></svg><figcaption>Window: x from −π to 4π, y from −4 to 4. Solid: y = −(3/2)cos(x/2) − 2. Dashed: the parent y = cos x. Gridlines every π/2 and every 1.</figcaption></figure>
 <div class="cs-key"><b>x-intercepts:</b> none. The whole graph stays between −7/2 and −1/2, so it never reaches y = 0. The parent's zeros (π/2 and 3π/2) become the <i>midline crossings</i> (π, −2) and (3π, −2). Always check the range before listing x-intercepts.</div>
-<div class="cs-trap"><b>Trap:</b> (1/2)x stretches the graph horizontally. Multiply the old x-values by 2. Do not divide them. And the negative A turns the parent's maximum at x = 0 into a minimum.</div>
+<div class="cs-trap"><b>Trap:</b> (1/2)x stretches the graph horizontally. Multiply the parent x-values by 2. Do not divide them. And the negative A turns the parent's maximum at x = 0 into a minimum.</div>
 </div>
 
 <div class="cs-run">
@@ -18247,10 +18259,10 @@ function features(body, v, steps, fam) {
       var amp = A.float() < 0 ? A.neg() : A;
       step(steps, 'Amplitude |A|, period 2π/|B|, phase shift C, midline y = D.', 'amplitude = ' + new Val(amp).text + '\nperiod = 2π/' + new Val(absB).text + ' = ' + (period ? new Val(period).text : '?') + '\nphase shift = ' + sText + (shift && shift.float() > 0 ? ' (right)' : shift && shift.float() < 0 ? ' (left)' : '') + '\nmidline y = ' + new Val(Dv).text, 'sinusoid');
       var lo = Dv.sub(amp), hi = Dv.add(amp);
-      var quarter = period ? period.mul(EX.rat(q(1, 4))) : null, pts = [];
-      var pat = fn === 'sin' ? [0, 1, 0, -1, 0] : [1, 0, -1, 0, 1];
-      if (quarter && shift) for (var i = 0; i < 5; i++) { var xx = shift.add(quarter.mul(EX.int(i))); var yy = Dv.add(A.mul(EX.int(pat[i]))); pts.push('(' + new Val(xx).text + ', ' + new Val(yy).text + ')'); }
-      if (pts.length) step(steps, 'Five key points, one quarter-period apart, starting at the phase shift. ' + fn + ' pattern ' + pat.join(', ') + ', times A, plus D.', pts.join('  '), 'key-points');
+      var quarter = period ? period.mul(EX.rat(q(1, 4))) : null, pts = [], prow = [];
+      var pat = fn === 'sin' ? [0, 1, 0, -1, 0] : [1, 0, -1, 0, 1], px = ['0', 'π/2', 'π', '3π/2', '2π'];
+      if (quarter && shift) for (var i = 0; i < 5; i++) { var xx = shift.add(quarter.mul(EX.int(i))); var yy = Dv.add(A.mul(EX.int(pat[i]))); pts.push('(' + new Val(xx).text + ', ' + new Val(yy).text + ')'); prow.push('(' + px[i] + ', ' + pat[i] + ')' + '            '.slice(px[i].length + String(pat[i]).length) + '→  ' + pts[i]); }
+      if (pts.length) step(steps, 'Parent table: parent x (θ) = 0, π/2, π, 3π/2, 2π and parent y = ' + fn + ' θ = ' + pat.join(', ') + '. Move each point: new x = θ/B + phase shift (horizontal stretch/shrink, then shift); new y = A·(parent y) + D (vertical stretch/reflection, then shift). Same points as starting at the phase shift and stepping a quarter period.', 'parent (θ, y)   →  new (x, y)\n' + prow.join('\n'), 'key-points');
       add('Amplitude', new Val(amp).text); add('Period', period ? new Val(period).text : '?'); add('Phase shift', sText + (shift && shift.float() > 0 ? ' (right)' : shift && shift.float() < 0 ? ' (left)' : '')); add('Midline', 'y = ' + new Val(Dv).text); add('Range', '[' + new Val(lo).text + ', ' + new Val(hi).text + ']');
       if (pts.length) add('Key points (one cycle)', pts.join(', '));
     } else if (fam.name === 'tangent') {
@@ -18896,7 +18908,7 @@ function render(res) {
       res.steps.forEach(function (s) {
         if (!s.note && !s.math) return;
         n++;
-        h.push('<div class="step"><span class="step-num">' + n + '</span>' + (s.note ? '<span class="eh-step-note">' + esc(s.note) + '</span>' : '') + (s.math ? '<div class="move">' + esc(s.math) + '</div>' : '') + '</div>');
+        h.push('<div class="step"><span class="step-num">' + n + '</span>' + (s.note ? '<span class="eh-step-note">' + esc(s.note).replace(/θ/g, '<span class="st-th">θ</span>') + '</span>' : '') + (s.math ? '<div class="move">' + esc(s.math).replace(/θ/g, '<span class="st-th">θ</span>') + '</div>' : '') + '</div>');
       });
       h.push('</div>');
     }
@@ -21244,22 +21256,20 @@ function finalizeStep(s, rng) {
   var max = s.max || Math.max(4, right.length + 2);
   wrong = wrong.slice(0, Math.max(1, max - right.length));
   s.opts = rng.shuffle(right.concat(wrong));
-  s.opts.forEach(function (o) { o.t = m(o.t); o.why = m(o.why); if (o.work) o.work = mlines(o.work); if (o.then) o.then.forEach(function (t) { finalizeStep(t, rng); }); });
+  s.opts.forEach(function (o) { o.t = m(o.t); o.why = m(o.why); if (o.work) o.work = mlines(o.work); if (o.table) mtable(o.table); if (o.then) o.then.forEach(function (t) { finalizeStep(t, rng); }); });
   s.q = m(s.q);
   if (s.work) s.work = mlines(s.work);
   if (s.note) s.note = m(s.note);
   return s;
 }
 function mlines(w) { return (Array.isArray(w) ? w : [w]).map(m); }
+function mtable(tb) { tb.cols = tb.cols.map(m); tb.rows = tb.rows.map(function (r) { return r.map(m); }); }
 function finalize(d, rng) {
   d.steps.forEach(function (s) { finalizeStep(s, rng); });
   d.given = m(d.given);
   if (d.prompt) d.prompt = m(d.prompt);
   if (d.summary) d.summary = mlines(d.summary);
-  if (d.table) {
-    d.table.cols = d.table.cols.map(m);
-    d.table.rows = d.table.rows.map(function (r) { return r.map(m); });
-  }
+  if (d.table) mtable(d.table);
   return d;
 }
 ST.finalize = finalize;
@@ -22408,6 +22418,8 @@ function sinusoidDrill(P, given) {
   /* ---- the table ---- */
   var cols = ['u = ' + insideT(P, v), v, fn + '(u)', 'y = ' + coefOf(A, fn + '(u)') + (D.isZero() ? '' : (D.sign() < 0 ? ' − ' : ' + ') + fq(D.abs()))];
   var rows = R.rows.map(function (r) { return [pnT(r.u), pnApprox(r.x), String(r.f), fq(r.y)]; });
+  var uTable = { cols: cols, rows: rows };
+  var pTable = { cols: ['parent x (θ)', 'parent y = ' + fn + ' θ', 'new x', 'new y'], rows: R.rows.map(function (r) { return [pnT(r.u), String(r.f), pnApprox(r.x), fq(r.y)]; }) };
   var xs = R.rows.map(function (r) { return r.x; });
   var xT = listPN(xs);
   var stpT = pnT(R.stp);
@@ -22442,52 +22454,98 @@ function sinusoidDrill(P, given) {
       no(v + ' = u  →  0, π/2, π, 3π/2, 2π', 'Those are the inside values. Solve for ' + v + '.')
     ].filter(Boolean), { fill: [1] })
   ];
-  var tail = [];
   var patT = R.pat.join(', ');
   var otherPat = fn === 'sin' ? '1, 0, −1, 0, 1' : '0, 1, 0, −1, 0';
-  tail.push(S('Fill in the ' + fn + '(u) column. What is ' + fn + ' at u = 0, π/2, π, 3π/2, 2π?', [
-    ok(patT, fn === 'sin' ? 'Sine starts at 0, rises to 1, back to 0, down to −1, back to 0.' : 'Cosine starts at 1, drops to 0, −1, back to 0, then 1.', { work: fn + '(u):  ' + patT, fill: [0, 2] }),
-    no(otherPat, fn === 'sin' ? 'That\'s the cosine pattern. Sine starts at 0.' : 'That\'s the sine pattern. Cosine starts at 1.'),
-    no(R.pat.map(function (x) { return -x; }).join(', '), 'That\'s what you get after a negative A flips it. Write the parent pattern first; A comes in the next column.'),
-    no('0, 1, 2, 3, 4', fn + ' only goes between −1 and 1.')
-  ], { fill: [0, 2] }));
+  /* steps shared by both tables; U = the u table, otherwise the parent table */
+  function patStep(U) {
+    var qt = U ? 'Fill in the ' + fn + '(u) column. What is ' + fn + ' at u = 0, π/2, π, 3π/2, 2π?' : 'Fill in the parent y column. What is ' + fn + ' θ at θ = 0, π/2, π, 3π/2, 2π?';
+    var col = U ? fn + '(u)' : 'parent y';
+    var fill = U ? [0, 2] : [1];
+    return S(qt, [
+      ok(patT, fn === 'sin' ? 'Sine starts at 0, rises to 1, back to 0, down to −1, back to 0.' : 'Cosine starts at 1, drops to 0, −1, back to 0, then 1.', { work: col + ':  ' + patT, fill: fill }),
+      no(otherPat, fn === 'sin' ? 'That\'s the cosine pattern. Sine starts at 0.' : 'That\'s the sine pattern. Cosine starts at 1.'),
+      no(R.pat.map(function (x) { return -x; }).join(', '), 'That\'s what you get after a negative A flips it. Write the parent pattern first; A comes in the ' + (U ? 'next' : 'new y') + ' column.'),
+      no('0, 1, 2, 3, 4', fn + ' only goes between −1 and 1.')
+    ], { fill: fill });
+  }
   var ys = R.rows.map(function (r) { return fq(r.y); }).join(', ');
   var show = R.rows.slice(0, 2).map(function (r) { return m(fqp(A)) + '·' + r.f + (D.isZero() ? '' : ' + ' + m(fqp(D))) + ' = ' + m(fq(r.y)); }).join(',  ');
-  tail.push(S('Fill in the y column: y = ' + coefOf(A, fn + '(u)') + (D.isZero() ? '' : (D.sign() < 0 ? ' − ' : ' + ') + fq(D.abs())) + '.', [
-    ok('y = ' + ys, 'Multiply each ' + fn + '(u) value by A, then add D: ' + show + ', …', { work: 'y:  ' + ys, fill: [3] }),
-    D.isZero() ? null : no('y = ' + R.pat.map(function (x) { return fq(A.mul(q(x))); }).join(', '), 'Add D = ' + m(fq(D)) + ' to every value at the end.'),
-    no('y = ' + R.pat.map(function (x) { return fq(A.neg().mul(q(x)).add(D)); }).join(', '), 'Use A with its sign: A = ' + m(fq(A)) + '.'),
-    D.isZero() ? null : no('y = ' + R.pat.map(function (x) { return fq(A.mul(q(x).add(D))); }).join(', '), 'Multiply first, then add D (order of operations), so D isn\'t multiplied by A.'),
-    no('y = ' + R.pat.map(function (x) { return fq(q(x).add(D)); }).join(', '), 'Multiply by A first. The amplitude is ' + m(fq(amp)) + ', not 1.')
-  ].filter(Boolean), { fill: [3] }));
+  var plusD = D.isZero() ? '' : (D.sign() < 0 ? ' − ' : ' + ') + fq(D.abs());
+  function yStep(U) {
+    var lhs = U ? 'y' : 'new y';
+    var qt = U ? 'Fill in the y column: y = ' + coefOf(A, fn + '(u)') + plusD + '.' : 'Apply the vertical changes to get new y: new y = ' + coefOf(A, '(parent y)') + plusD + '.';
+    var why = U ? 'Multiply each ' + fn + '(u) value by A, then add D: ' : 'Multiply each parent y by A (vertical stretch' + (A.sign() < 0 ? ', and the minus reflects it' : '') + '), then add D (shift ' + (D.sign() < 0 ? 'down' : 'up') + '): ';
+    var fill = [3];
+    return S(qt, [
+      ok(lhs + ' = ' + ys, why + show + ', …', { work: lhs + ':  ' + ys, fill: fill }),
+      D.isZero() ? null : no(lhs + ' = ' + R.pat.map(function (x) { return fq(A.mul(q(x))); }).join(', '), 'Add D = ' + m(fq(D)) + ' to every value at the end.'),
+      no(lhs + ' = ' + R.pat.map(function (x) { return fq(A.neg().mul(q(x)).add(D)); }).join(', '), 'Use A with its sign: A = ' + m(fq(A)) + '.'),
+      D.isZero() ? null : no(lhs + ' = ' + R.pat.map(function (x) { return fq(A.mul(q(x).add(D))); }).join(', '), 'Multiply first, then add D (order of operations), so D isn\'t multiplied by A.'),
+      no(lhs + ' = ' + R.pat.map(function (x) { return fq(q(x).add(D)); }).join(', '), 'Multiply by A first. The amplitude is ' + m(fq(amp)) + ', not 1.')
+    ].filter(Boolean), { fill: fill });
+  }
   var lo = D.sub(amp), hi = D.add(amp);
-  tail.push(S('What is the range?', [
-    ok('[D − |A|, D + |A|] = [' + fq(lo) + ', ' + fq(hi) + ']', 'The wave goes one amplitude below and above the midline.', { work: 'Range: [' + fq(lo) + ', ' + fq(hi) + ']' }),
-    ok('Read the table: lowest y is ' + fq(lo) + ', highest is ' + fq(hi) + ', so [' + fq(lo) + ', ' + fq(hi) + ']', 'Same answer straight from the y column.', { work: 'Range: [' + fq(lo) + ', ' + fq(hi) + ']' }),
-    D.isZero() ? null : no('[−|A|, |A|] = [' + fq(amp.neg()) + ', ' + fq(amp) + ']', 'Shift it by D = ' + m(fq(D)) + '. The wave is centered on the midline.'),
-    no('[' + fq(D) + ', ' + fq(hi) + ']', 'The graph goes below the midline too.'),
-    no('(−∞, ∞)', 'Sine and cosine waves are bounded. Only the domain is all real numbers.')
-  ].filter(Boolean)));
+  function rangeStep() {
+    return S('What is the range?', [
+      ok('[D − |A|, D + |A|] = [' + fq(lo) + ', ' + fq(hi) + ']', 'The wave goes one amplitude below and above the midline.', { work: 'Range: [' + fq(lo) + ', ' + fq(hi) + ']' }),
+      ok('Read the table: lowest y is ' + fq(lo) + ', highest is ' + fq(hi) + ', so [' + fq(lo) + ', ' + fq(hi) + ']', 'Same answer straight from the y column.', { work: 'Range: [' + fq(lo) + ', ' + fq(hi) + ']' }),
+      D.isZero() ? null : no('[−|A|, |A|] = [' + fq(amp.neg()) + ', ' + fq(amp) + ']', 'Shift it by D = ' + m(fq(D)) + '. The wave is centered on the midline.'),
+      no('[' + fq(D) + ', ' + fq(hi) + ']', 'The graph goes below the midline too.'),
+      no('(−∞, ∞)', 'Sine and cosine waves are bounded. Only the domain is all real numbers.')
+    ].filter(Boolean));
+  }
   var maxI = 0, minI = 0;
   R.rows.forEach(function (r, i) { if (r.y.cmp(R.rows[maxI].y) > 0) maxI = i; if (r.y.cmp(R.rows[minI].y) < 0) minI = i; });
   var pt = function (i) { return '(' + pnT(R.rows[i].x) + ', ' + fq(R.rows[i].y) + ')'; };
   var parentMax = fn === 'sin' ? 1 : 0;
-  tail.push(S('Which point in the table is a maximum of the graph?', [
-    ok(pt(maxI), 'Look down the y column for the largest value, ' + m(fq(hi)) + '.' + (A.sign() < 0 ? ' Because A < 0, it lines up with where ' + fn + '(u) = −1.' : ''), { work: 'Max at ' + pt(maxI) + ';  min at ' + pt(minI) }),
-    no(pt(minI), 'That\'s the lowest point, y = ' + m(fq(lo)) + '.'),
-    parentMax === maxI ? null : no(pt(parentMax), 'That\'s where ' + fn + '(u) = 1, but A < 0 flips it, so that point is a minimum.'),
-    no('(' + pnT(R.rows[2].x) + ', ' + fq(R.rows[2].y) + ')', 'Check the y column: is ' + m(fq(R.rows[2].y)) + ' the biggest value?')
-  ].filter(function (o) { return o && (o.ok || o.t !== ''); })));
+  function maxStep(U) {
+    var py = U ? fn + '(u)' : 'parent y';
+    return S('Which point in the table is a maximum of the graph?', [
+      ok(pt(maxI), 'Look down the ' + (U ? 'y' : 'new y') + ' column for the largest value, ' + m(fq(hi)) + '.' + (A.sign() < 0 ? ' Because A < 0, it lines up with where ' + py + ' = −1.' : ''), { work: 'Max at ' + pt(maxI) + ';  min at ' + pt(minI) }),
+      no(pt(minI), 'That\'s the lowest point, y = ' + m(fq(lo)) + '.'),
+      parentMax === maxI ? null : no(pt(parentMax), 'That\'s where ' + py + ' = 1, but A < 0 flips it, so that point is a minimum.'),
+      no('(' + pnT(R.rows[2].x) + ', ' + fq(R.rows[2].y) + ')', 'Check the y column: is ' + m(fq(R.rows[2].y)) + ' the biggest value?')
+    ].filter(function (o) { return o && (o.ok || o.t !== ''); }));
+  }
+  function tailU() { return [patStep(true), yStep(true), rangeStep(), maxStep(true)]; }
+
+  /* ---- parent table: parent x (θ), parent y, then transform to new x, new y ---- */
+  var divT = _.par(Bt), hPlus = pnZero(h) ? '' : (pnF(h) < 0 ? ' − ' + hAbsT : ' + ' + hT);
+  var cTh = join([{ neg: false, body: 'θ' }, term(C.r, ''), term(C.p, 'π')]);
+  var thVals = function (f) { return R.rows.map(function (r) { return pnT(f(r.u)); }).join(', '); };
+  var trivialX = B.isOne() && !P.Bpi && pnZero(h);
+  var nxOpts = [
+    ok('new x = θ ÷ ' + divT + hPlus + '  →  ' + xT, 'Divide by B for the horizontal stretch/shrink, then ' + (pnZero(h) ? 'there is no phase shift to add.' : 'add the phase shift ' + m(hT) + ' (' + hAbsT + ' ' + dir + ').'), { work: 'new x = θ/' + divT + hPlus + ':  ' + xT, fill: [2] }),
+    ok('Set the inside equal to θ: ' + insideT(P, v) + ' = θ  →  ' + v + ' = (' + cTh + ') ÷ ' + divT + '  →  ' + xT, 'The inside plays the role of θ. Undo it in reverse: add C, then divide by B.', { work: insideT(P, v) + ' = θ  →  ' + v + ' = (' + cTh + ')/' + divT + ':  ' + xT, fill: [2] }),
+    P.Bpi || pnZero(h) || B.isOne() ? null : no('new x = (θ' + hPlus + ') ÷ ' + divT + '  →  ' + thVals(function (u) { return pnDiv(pnAdd(u, h), B); }), 'Divide first, then add the shift. Adding the shift before dividing shrinks the shift too.'),
+    P.Bpi || B.isOne() ? null : no('new x = θ · ' + divT + hPlus + '  →  ' + thVals(function (u) { return pnAdd(pnMul(u, B), h); }), 'B is inside with x, so it works backwards: divide parent x by B. (B > 1 squeezes the graph, B < 1 stretches it.)'),
+    P.Bpi || pnZero(h) ? null : no('new x = θ ÷ ' + divT + (pnF(h) < 0 ? ' + ' + hAbsT : ' − ' + hT) + '  →  ' + thVals(function (u) { return pnSub(pnDiv(u, B), h); }), 'Wrong direction. The shift is ' + m(hAbsT) + ' to the ' + dir + '.'),
+    trivialX ? null : no('new x = parent x  →  0, π/2, π, 3π/2, 2π', 'Parent x is the angle for y = ' + fn + ' θ. B and C move it.')
+  ].filter(Boolean);
+  function parentRoute() {
+    return [
+      S('Fill in the parent x column. What are the five key angles θ of y = ' + fn + ' θ?', [
+        ok('θ = 0, π/2, π, 3π/2, 2π', 'One full cycle of the parent graph, split into quarters.', { work: 'parent x (θ):  0, π/2, π, 3π/2, 2π', fill: [0] }),
+        no('θ = 0, π/4, π/2, 3π/4, π', 'That\'s only half a cycle.'),
+        no('θ = 0, 1, 2, 3, 4', 'The key angles of ' + fn + ' are multiples of π/2.'),
+        no('θ = 0, π, 2π, 3π, 4π', 'That\'s two cycles with only the midline points.')
+      ], { fill: [0] }),
+      patStep(false),
+      S('Apply the horizontal changes to get new x: stretch/shrink by B, then the phase shift.', nxOpts, { fill: [2], max: 6 }),
+      yStep(false), rangeStep(), maxStep(false)
+    ];
+  }
   var wrongStart = pnZero(h) ? null : no('Use ' + v + ' = 0, π/2, π, 3π/2, 2π', 'Those are the key x-values for y = ' + fn + ' x only. B and C stretch and shift them.');
-  steps.push(S('How do you want to get the five ' + v + '-values for the table?', [
-    ok('Quarter steps: start at the phase shift and keep adding period ÷ 4', 'Fast when you already know the shift and period.', { then: quarter.concat(tail) }),
-    ok('Inside table: set u = ' + insideT(P, v) + ' equal to 0, π/2, π, 3π/2, 2π and solve each for ' + v, 'Slower, but you never have to remember the shift or period formulas.', { then: insideRoute.concat(tail) }),
+  steps.push(S('How do you want to build the table?', [
+    ok('Parent table: parent x (θ) and parent y from y = ' + fn + ' θ, then apply the stretch/shrink, reflection and shifts to get new x and new y', 'Start from the five points you know and move each one.', { then: parentRoute(), table: pTable }),
+    ok('Quarter steps: start at the phase shift and keep adding period ÷ 4', 'Fast when you already know the shift and period.', { then: quarter.concat(tailU()), table: uTable }),
+    ok('Inside table: set u = ' + insideT(P, v) + ' equal to 0, π/2, π, 3π/2, 2π and solve each for ' + v, 'Slower, but you never have to remember the shift or period formulas.', { then: insideRoute.concat(tailU()), table: uTable }),
     wrongStart || no('Use ' + v + ' = 0, 1, 2, 3, 4', 'The key points are a quarter period apart, not 1 apart.'),
     no('Pick any five ' + v + '-values and plug them in', 'That works eventually, but random points won\'t land on the peaks and midline crossings that shape the graph.')
   ]));
   var summary = [std, 'Amplitude ' + fq(amp) + ',  period ' + perT + ',  phase shift ' + (pnZero(h) ? 'none' : hAbsT + ' ' + dir) + ',  midline y = ' + fq(D), 'Range [' + fq(lo) + ', ' + fq(hi) + ']'];
   return { title: 'Graph the sinusoid', prompt: 'Find the amplitude, period, phase shift and midline, then fill in the five-point table.', given: given || std, steps: steps, summary: summary,
-    table: { cols: cols, rows: rows } };
+    table: pTable };
 }
 ST.sinusoidDrill = sinusoidDrill;
 _.addType({
@@ -23751,6 +23809,7 @@ ST.SECTION_NAMES = SECTION_NAMES;
 var LEVELS = [['1', 'Basic'], ['2', 'Standard'], ['3', 'Challenge']];
 var LETTERS = 'abcdefgh';
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function th(s) { return esc(s).replace(/θ/g, '<span class="st-th">θ</span>'); }   /* θ in a font that draws the closed oval with the bar */
 function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
 function typesFor(sec) { return ST.TYPES.filter(function (t) { return t.section === sec; }); }
 function sectionLabel(sec) { return sec === 0 ? 'Algebra' : 'Section ' + sec; }
@@ -23804,11 +23863,11 @@ Trainer.prototype.render = function (fresh) {
   var meta = this.meta;
   var kind = (d.custom ? 'Your equation' : sectionLabel(d.section)) + ' · ' + esc(d.title);
   var top = '<div class="st-top"><span class="st-kind">' + kind + '</span>' + (meta.queue ? '<span class="st-qcount">Problem ' + meta.queue.i + ' of ' + meta.queue.n + '</span>' : '') + '</div>';
-  var given = '<div class="st-given">' + (d.prompt ? '<div class="st-prompt">' + esc(d.prompt) + '</div>' : '') + '<div class="st-eq">' + esc(d.given) + '</div></div>';
+  var given = '<div class="st-given">' + (d.prompt ? '<div class="st-prompt">' + th(d.prompt) + '</div>' : '') + '<div class="st-eq">' + th(d.given) + '</div></div>';
   var fig = d.fig ? '<div class="st-figwrap">' + d.fig + '</div>' : '';
   /* paper */
   var lines = [], upto = this.finished ? this.path.length - 1 : i;
-  for (var k = 0; k <= upto; k++) this.workFor(k).forEach(function (w) { lines.push('<li' + (k === i && !self.finished ? ' class="st-now"' : '') + '>' + esc(w) + '</li>'); });
+  for (var k = 0; k <= upto; k++) this.workFor(k).forEach(function (w) { lines.push('<li' + (k === i && !self.finished ? ' class="st-now"' : '') + '>' + th(w) + '</li>'); });
   var paper = '<div class="st-paper"><div class="st-label">Your paper</div>' + (lines.length ? '<ol class="st-lines">' + lines.join('') + '</ol>' : '<p class="st-empty">Each step you get right is written here.</p>') + '</div>';
   var table = d.table ? this.tableHTML(upto) : '';
   var body = '<div class="st-body' + (d.table ? ' st-has-table' : '') + '">' + paper + table + '</div>';
@@ -23820,12 +23879,12 @@ Trainer.prototype.render = function (fresh) {
       var tried = st.tried.indexOf(j) >= 0;
       if (st.done && o.ok) { cls += j === st.choice ? ' st-right' : ' st-alsoright'; mark = '✓'; }
       else if (tried || (st.done && st.peek === j)) { cls += o.ok ? '' : ' st-wrong'; mark = o.ok ? '✓' : '✗'; }
-      return '<button type="button" class="' + cls + '" data-opt="' + j + '"><span class="st-letter">' + LETTERS[j] + ')</span><span class="st-otext">' + esc(o.t) + '</span><span class="st-mark" aria-hidden="true">' + mark + '</span></button>';
+      return '<button type="button" class="' + cls + '" data-opt="' + j + '"><span class="st-letter">' + LETTERS[j] + ')</span><span class="st-otext">' + th(o.t) + '</span><span class="st-mark" aria-hidden="true">' + mark + '</span></button>';
     }).join('');
     var nRight = s.opts.filter(function (o) { return o.ok; }).length;
     var hint = nRight > 1 ? '<span class="st-multi">More than one answer works here — pick the one you would use.</span>' : '';
     out = '<div class="st-stepbox"><div class="st-stephead"><span class="st-stepno">Step ' + (i + 1) + '</span>' + hint + '</div>' +
-      '<div class="st-q">' + esc(s.q) + '</div><div class="st-opts" role="group" aria-label="Choices for step ' + (i + 1) + '">' + optsH + '</div>' +
+      '<div class="st-q">' + th(s.q) + '</div><div class="st-opts" role="group" aria-label="Choices for step ' + (i + 1) + '">' + optsH + '</div>' +
       '<div class="st-fb" aria-live="polite">' + this.feedbackHTML(i) + '</div></div>';
   }
   var dots = this.path.map(function (p, j) {
@@ -23860,8 +23919,8 @@ Trainer.prototype.feedbackHTML = function (i) {
   var s = this.path[i], st = this.stepState(i);
   if (st.done) {
     var o = s.opts[st.choice], others = s.opts.filter(function (x, j) { return x.ok && j !== st.choice; });
-    var h = st.revealed ? '<div class="st-fb-shown"><b>Answer:</b> ' + esc(o.t) + '<br/>' + esc(o.why) + '</div>'
-      : '<div class="st-fb-good"><b>' + (st.first ? 'Correct!' : 'That\'s it.') + '</b> ' + esc(o.why) + '</div>';
+    var h = st.revealed ? '<div class="st-fb-shown"><b>Answer:</b> ' + th(o.t) + '<br/>' + th(o.why) + '</div>'
+      : '<div class="st-fb-good"><b>' + (st.first ? 'Correct!' : 'That\'s it.') + '</b> ' + th(o.why) + '</div>';
     if (others.length) h += '<div class="st-fb-also"><b>' + (st.revealed ? 'Also correct:' : 'Also correct — another way to do it:') + '</b><ul>' + others.map(function (x) { return '<li>' + esc(x.t) + (x.why ? ' <span class="small">— ' + esc(x.why) + '</span>' : '') + '</li>'; }).join('') + '</ul></div>';
     if (o.then && o.then.length && !st.revealed) h += '<div class="st-fb-route small">The next steps follow the route you picked. Use “Try again” at the end to go the other way.</div>';
     if (st.peek !== undefined && st.peek !== st.choice) { var p = s.opts[st.peek]; h += '<div class="' + (p.ok ? 'st-fb-good' : 'st-fb-bad') + ' st-fb-peek"><b>' + LETTERS[st.peek] + ') ' + (p.ok ? 'also works' : 'doesn\'t work') + ':</b> ' + esc(p.why) + '</div>'; }
@@ -23869,15 +23928,20 @@ Trainer.prototype.feedbackHTML = function (i) {
   }
   if (st.tried.length) {
     var w = s.opts[st.tried[st.tried.length - 1]];
-    return '<div class="st-fb-bad"><b>Not quite.</b> ' + esc(w.why || 'Look again.') + ' <span class="small">Try another choice.</span></div>';
+    return '<div class="st-fb-bad"><b>Not quite.</b> ' + th(w.why || 'Look again.') + ' <span class="small">Try another choice.</span></div>';
   }
   return '';
 };
+Trainer.prototype.tableFor = function (upto) {     /* a route choice can bring its own table */
+  var tb = this.d.table;
+  for (var k = 0; k <= upto; k++) { var st = this.st[k]; if (st && st.done && this.path[k].opts[st.choice].table) tb = this.path[k].opts[st.choice].table; }
+  return tb;
+};
 Trainer.prototype.tableHTML = function (upto) {
-  var d = this.d, vis = d.table.rows.map(function (r) { return r.map(function () { return false; }); });
+  var tb = this.tableFor(upto), vis = tb.rows.map(function (r) { return r.map(function () { return false; }); });
   for (var k = 0; k <= upto; k++) this.fillFor(k).forEach(function (col) { vis.forEach(function (r) { r[col] = true; }); });
-  var head = '<tr>' + d.table.cols.map(function (h) { return '<th scope="col">' + esc(h) + '</th>'; }).join('') + '</tr>';
-  var rows = d.table.rows.map(function (r, ri) { return '<tr>' + r.map(function (cell, ci) { return vis[ri][ci] ? '<td>' + esc(cell) + '</td>' : '<td class="st-blank"><span aria-label="not filled yet">?</span></td>'; }).join('') + '</tr>'; }).join('');
+  var head = '<tr>' + tb.cols.map(function (h) { return '<th scope="col">' + th(h) + '</th>'; }).join('') + '</tr>';
+  var rows = tb.rows.map(function (r, ri) { return '<tr>' + r.map(function (cell, ci) { return vis[ri][ci] ? '<td>' + th(cell) + '</td>' : '<td class="st-blank"><span aria-label="not filled yet">?</span></td>'; }).join('') + '</tr>'; }).join('');
   return '<div class="st-tablewrap"><div class="st-label">Table</div><div class="st-tscroll"><table class="st-table">' + head + rows + '</table></div></div>';
 };
 Trainer.prototype.endHTML = function () {

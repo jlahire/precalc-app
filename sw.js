@@ -1,6 +1,6 @@
 /* Offline copy for the GitHub Pages site.
    Network first: when online you always get the newest version; offline you get the last one saved. */
-var CACHE = 'precalc-prep-v2';
+var CACHE = 'precalc-prep-v3';
 var FILES = ['./', './index.html', './precalc-prep.html', './manifest.webmanifest',
   './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'];
 
