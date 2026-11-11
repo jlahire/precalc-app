@@ -345,3 +345,8 @@ html.pp-on .move.pp-paper,html.pp-on .stack.pp-paper,.pp-sheet{overflow-x:hidden
 .tg-cell.tg-bad{border:2px solid #c45a4b;background:#fdecea}
 .tg-fill.pp-sheet{display:block;background-image:none;border:0;box-shadow:none;padding:0;color:var(--pp-red);font-size:1.15rem}
 .tg-mine{fill:#7b5cc4;stroke:#fff;stroke-width:1.5}.tg-mine.tg-ok{fill:#2f7d3a}.tg-mine.tg-no{fill:#c45a4b}
+
+/* typed "num / ---- / den" fractions rebuilt as drawn bars; a plain dash line becomes a solid rule */
+.pp-fracline{min-height:calc(var(--pp-line) * 2);display:flex;align-items:center;flex-wrap:nowrap;gap:.25em}
+.pp-fracline>.pp-frac{font-size:1em}
+.pp-sumrule{height:2px;background:currentColor;border-radius:2px;margin:.1em 0 .3em;max-width:12em;opacity:.85}

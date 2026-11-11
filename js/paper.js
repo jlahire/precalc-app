@@ -88,6 +88,9 @@ function absGroups(node) {
 /* ---------------- structure: ^, _, √, / ---------------- */
 function isTerm(n) { return n && (n.t === 'num' || n.t === 'w' || n.t === 'grp' || n.t === 'frac' || n.t === 'rad' && n.body || n.t === 'sym' && /[πθαβφe∞°′']/.test(n.v) || n.t === 'sup' || n.t === 'sub' || n.t === 'supx' || n.t === 'subx'); }
 function stripG(n) { return n && n.t === 'grp' && !n.abs && (n.open === '(' || n.open === '[' || n.open === '{') ? n.items : [n]; }
+var TRIG = { sin: 1, cos: 1, tan: 1, sec: 1, csc: 1, cot: 1, log: 1, ln: 1, arcsin: 1, arccos: 1, arctan: 1 };
+function isFn(n) { return n && n.t === 'w' && TRIG[n.v.toLowerCase()]; }
+function isArg(n) { return n && (n.t === 'sym' && /[θαβφx]/.test(n.v) || n.t === 'w' && n.v.length <= 2 && !FN[n.v.toLowerCase()]); }
 var MATHWORD = { opp: 1, adj: 1, hyp: 1, rise: 1, run: 1 };
 function wordy(n) { return n.t === 'w' && n.v.length >= 3 && !FN[n.v.toLowerCase()] && !MATHWORD[n.v.toLowerCase()] && !/^(arc|sec|csc|cot)/i.test(n.v); }
 
@@ -131,10 +134,26 @@ function structure(items) {
       /* numerator: run of adjacent terms back to a space/operator */
       var k = out.length - 1;
       while (k > 0 && isTerm(out[k - 1]) && !(out[k - 1].t === 'sym' && out[k - 1].v === '°')) k--;
+      /* "sin θ/cos θ": a function name and its argument stay together in the numerator */
+      if (k === out.length - 1 && isArg(out[k]) && out[k - 1] && out[k - 1].t === 'sp' && out[k - 1].v.length === 1) {
+        var fk = out[k - 2] && (out[k - 2].t === 'sup' || out[k - 2].t === 'supx') ? k - 3 : k - 2;
+        if (isFn(out[fk])) { k = fk; while (k > 0 && isTerm(out[k - 1]) && !(out[k - 1].t === 'sym' && out[k - 1].v === '°')) k--; }
+      }
       var numer = out.slice(k);
       /* denominator */
       var j = i + 1, den = [items[j]];
       var first = items[j];
+      /* ".../cos θ" or ".../cos²θ ": keep the function with its argument in the denominator */
+      if (isFn(first)) {
+        var a = j + 1;
+        if (items[a] && (items[a].t === 'sup' || items[a].t === 'supx')) a++;
+        if (items[a] && items[a].t === 'sp' && items[a].v.length === 1 && isArg(items[a + 1])) {
+          den = items.slice(j, a + 2); j = a + 1;
+          var nn0 = numer.length === 1 ? stripG(numer[0]) : numer;
+          out.splice(k, out.length - k, { t: 'frac', n: nn0, d: den });
+          i = j; continue;
+        }
+      }
       if (first.t === 'w' && FN[first.v.toLowerCase()] && items[j + 1] && items[j + 1].t === 'grp') { den.push(items[j + 1]); j++; }
       else if (first.t === 'w' && FN[first.v.toLowerCase()] && items[j + 1] && (items[j + 1].t === 'supx' || items[j + 1].t === 'sup') && items[j + 2] && items[j + 2].t === 'grp') { den.push(items[j + 1], items[j + 2]); j += 2; }
       if (items[j + 1] && (items[j + 1].t === 'sup' || items[j + 1].t === 'supx') && first.t !== 'grp') {
@@ -242,6 +261,31 @@ function cellPos(line) {
   return out;
 }
 function splitCells(line) { return line.trim().split(/ {2,}/); }
+function indent0(line) { return line.match(/^ */)[0].length; }
+function isDashLine(line) { return /^\s*-{3,}(?=\s|$)/.test(line || ''); }
+/* rebuild "num / ----- / den" (several side by side, with = or · between) as drawn fractions */
+function asciiFrac(top, mid, bot) {
+  var runs = [], re = /-{3,}/g, m;
+  while ((m = re.exec(mid))) runs.push({ s: m.index, e: m.index + m[0].length, n: [], d: [] });
+  var nearest = function (c) {
+    var mid0 = c.at + c.s.length / 2, best = 0, bd = Infinity;
+    runs.forEach(function (r, k) { var d = mid0 < r.s ? r.s - mid0 : mid0 > r.e ? mid0 - r.e : 0; if (d < bd) { bd = d; best = k; } });
+    return best;
+  };
+  cellPos(top).forEach(function (c) { runs[nearest(c)].n.push(c.s); });
+  cellPos(bot).forEach(function (c) { runs[nearest(c)].d.push(c.s); });
+  var h = '', at = 0;
+  runs.forEach(function (r) {
+    var between = mid.slice(at, r.s).trim();
+    if (between) h += ' ' + inline(between) + ' ';
+    h += '<span class="pp-frac pp-w' + (hash(r.n.join(' ')) % 3) + '"><span class="pp-num"><span class="pp-sr">(</span>' + inline(r.n.join('  ')) +
+      '<span class="pp-sr">)/(</span></span><span class="pp-den">' + inline(r.d.join('  ')) + '<span class="pp-sr">)</span></span></span>';
+    at = r.e;
+  });
+  var tail = mid.slice(at).trim();
+  if (tail) h += ' ' + inline(tail);
+  return '<div class="pp-line pp-fracline" style="padding-left:' + Math.min(4, Math.min(indent0(top), indent0(mid)) * 0.3).toFixed(2) + 'em">' + h + '</div>';
+}
 function isHeader(cells) { return cells.every(function (c) { return !/[0-9=]/.test(c) && c.length < 24; }); }
 function block(text, opts) {
   opts = opts || {};
@@ -252,6 +296,16 @@ function block(text, opts) {
     if (!raw.trim()) { out.push('<div class="pp-blank"></div>'); i++; continue; }
     var m = /^\s*(Step\s+\d+[a-z]?\.?|Check:?|Answer:?|Why:?|Note:?)\s{2,}(.*)$/.exec(raw) || /^\s*(Step\s+\d+[a-z]?[.:])\s*(.*)$/.exec(raw);
     if (m) { out.push('<div class="pp-line pp-stepline"><span class="pp-stepno">' + esc(m[1].replace(/[.:]$/, '')) + '</span> <span class="pp-note">' + inline(m[2]) + '</span></div>'); i++; continue; }
+    /* typed fractions: a numerator line, a line of dashes, a denominator line -> drawn fraction bars */
+    if (i + 2 < lines.length && isDashLine(lines[i + 1]) && lines[i + 2].trim() && !isDashLine(raw)) {
+      if (/^\s*[+\-−]\s/.test(raw)) {   /* column addition ("+ 5x - 2y = 8"): just a solid rule under it */
+        out.push('<div class="pp-line" style="padding-left:' + Math.min(4, indent0(raw) * 0.3).toFixed(2) + 'em">' + inline(raw.trim()) + '</div><div class="pp-sumrule"></div>');
+        i += 2; continue;
+      }
+      out.push(asciiFrac(raw, lines[i + 1], lines[i + 2]));
+      i += 3; continue;
+    }
+    if (isDashLine(raw)) { out.push('<div class="pp-sumrule"></div>'); i++; continue; }
     var indent = raw.match(/^ */)[0].length, cells = splitCells(raw);
     /* a run of lines that were lined up with spaces (monospace columns): rebuild the columns from character positions */
     if (cells.length >= 2) {
