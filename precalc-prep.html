@@ -1139,7 +1139,10 @@ try {
 <a href="#pretest">Diagnostic</a>
 <a href="#workflow">How to Use This</a>
 <a href="#equation-helper">Equation Helper</a>
+<a href="#check-work">Check My Work</a>
+<a href="#graph-table">Graph It with a Table</a>
 <a href="#graph-practice">Graph → Equation Practice</a>
+<a href="#progress">My Progress</a>
 <a href="#practice-generator">Practice Generator</a>
 <a href="#step-practice">Step-by-Step Practice</a>
 <a href="#skills-library">Skills Library</a>
@@ -1499,7 +1502,7 @@ points in precalculus than anything in Parts D or E.</div>
 <div class="eh-krow" role="group" aria-label="Functions"><button type="button" data-ins="sin()" data-caret="4">sin</button><button type="button" data-ins="cos()" data-caret="4">cos</button><button type="button" data-ins="tan()" data-caret="4">tan</button><button type="button" data-ins="sin⁻¹()" data-caret="6" title="Inverse sine" aria-label="Inverse sine">sin⁻¹</button><button type="button" data-ins="cos⁻¹()" data-caret="6" title="Inverse cosine" aria-label="Inverse cosine">cos⁻¹</button><button type="button" data-ins="tan⁻¹()" data-caret="6" title="Inverse tangent" aria-label="Inverse tangent">tan⁻¹</button><button type="button" data-ins="sec⁻¹()" data-caret="6" title="Inverse secant" aria-label="Inverse secant">sec⁻¹</button><button type="button" data-ins="csc⁻¹()" data-caret="6" title="Inverse cosecant" aria-label="Inverse cosecant">csc⁻¹</button><button type="button" data-ins="cot⁻¹()" data-caret="6" title="Inverse cotangent" aria-label="Inverse cotangent">cot⁻¹</button><button type="button" data-ins="sec()" data-caret="4">sec</button><button type="button" data-ins="csc()" data-caret="4">csc</button><button type="button" data-ins="cot()" data-caret="4">cot</button><button type="button" data-ins="log()" data-caret="4" title="Log base 10" aria-label="Log base 10">log</button><button type="button" data-ins="ln()" data-caret="3" title="Natural log" aria-label="Natural log">ln</button><button type="button" data-ins="log_()()" data-caret="5" title="Log with a base: base in the first ( ), input in the second" aria-label="Log with a base: base in the first ( ), input in the second">log<sub>b</sub></button></div>
 <div class="eh-krow" role="group" aria-label="Edit"><button type="button" data-act="next" title="Jump to the next empty box, or past the next closing bracket" aria-label="Jump to the next empty box, or past the next closing bracket" class="eh-k-edit">Next box ⇥</button><button type="button" data-act="left" title="Move cursor left" aria-label="Move cursor left" class="eh-k-edit">◀</button><button type="button" data-act="right" title="Move cursor right" aria-label="Move cursor right" class="eh-k-edit">▶</button><button type="button" data-act="back" title="Delete" aria-label="Delete" class="eh-k-edit">⌫</button><button type="button" data-act="clear" title="Clear everything" aria-label="Clear everything" class="eh-k-edit">Clear</button></div>
 </div>
-<p class="small eh-typing">Typing works too: <code>^</code> for powers, <code>sqrt()</code> or <code>√</code>, <code>pi</code>, <code>log_2(x)</code>, <code>sin^2 x</code>, <code>30°</code>. Multiplication can be implied: <code>2x</code>, <code>3(x+1)</code>, <code>4pi</code>.</p>
+<p class="small eh-typing">Typing works too: <code>^</code> for powers, <code>sqrt()</code> or <code>√</code>, <code>π</code> (typing pi turns into π), <code>log_2(x)</code>, <code>sin^2 x</code>, <code>30°</code>. Multiplication can be implied: <code>2x</code>, <code>3(x+1)</code>, <code>4pi</code>.</p>
 <div class="eh-goalrow">
 <label for="eh-goal">What are you looking for?</label>
 <select id="eh-goal"><option value="">—</option></select>
@@ -1513,6 +1516,43 @@ points in precalculus than anything in Parts D or E.</div>
 <div aria-live="polite" class="eh-more" id="eh-more"></div>
 </div>
 <p class="small eh-scope">Covers the course's algebra, exponential, logarithmic, and trig problem types. When something is outside what it can do exactly, it says so, or gives a numeric approximation and labels it as one.</p>
+</section>
+<section id="check-work">
+<h2>Check My Work</h2>
+<div class="knowledge-meta">
+<div class="knowledge-row"><span class="knowledge-label">How it works</span><span>Type the problem, then your steps exactly as you wrote them on paper, one step per line. It checks every line against the one before, finds the FIRST step that goes wrong, names the mistake (sign error, (a + b)² = a² + b², splitting a log, forgetting ±, keeping an extraneous answer…), shows the correct move and the full correct solution, and gives you practice on that exact mistake.</span></div>
+<div class="knowledge-row"><span class="knowledge-label">Tips</span><span>Answers can be written like <code>x = 3 or x = -1</code> or <code>x = 3, -1</code>. Mark a thrown-out answer with the word <code>extraneous</code> or <code>reject</code>. Restriction lines like <code>x ≠ 2</code> and words like "check" are fine.</span></div>
+</div>
+<div class="cw-wrap">
+<div class="cw-input">
+<label class="eh-label" for="cw-problem">The problem</label>
+<div class="cw-prow"><input autocapitalize="off" autocomplete="off" id="cw-problem" placeholder="e.g. √(x + 3) = x - 3" spellcheck="false" type="text"/><button id="cw-from-helper" type="button" title="Use the problem from the Equation Helper box">From helper</button></div>
+<label class="eh-label" for="cw-steps">Your steps (one per line)</label>
+<textarea autocapitalize="off" autocomplete="off" id="cw-steps" rows="8" spellcheck="false" placeholder="x + 3 = (x - 3)^2&#10;x + 3 = x^2 - 6x + 9&#10;0 = x^2 - 7x + 6&#10;..."></textarea>
+<div class="eh-btns"><button class="eh-go" id="cw-go" type="button">Check my work</button><button id="cw-clear" type="button">Clear</button></div>
+<div class="eh-examples" id="cw-examples"></div>
+</div>
+<div class="cw-preview" id="cw-preview" aria-live="polite"></div>
+</div>
+<div aria-live="polite" id="cw-out"></div>
+</section>
+<section id="progress">
+<h2>My Progress</h2>
+<p class="lead">Every answer you check in the drills, Graph → Equation and Check My Work is saved on this device. The topics that need work rise to the top, each with a one-tap Practice button.</p>
+<div id="progress-host"></div>
+</section>
+<section id="graph-table">
+<h2>Graph It with a Table</h2>
+<div class="knowledge-meta">
+<div class="knowledge-row"><span class="knowledge-label">How it works</span><span>Like the worksheet: graph the trig function, plot the maximum, minimum and midline points of one cycle, and use the table for the parent points and the new points. Fill in the table and tap points onto the graph, then check, or press <b>Start step by step</b> to watch the table fill in one column at a time: parent x and y, then new x (apply B and C), then new y (apply A and D), then the points, then the curve.</span></div>
+</div>
+<div class="gp-tools"><label>Type <select id="tg-fn"><option value="mix">Sine or cosine</option><option value="sin">Sine</option><option value="cos">Cosine</option></select></label><label>Level <select id="tg-level"><option value="1">Basic</option><option selected="" value="2">Standard</option><option value="3">With a shift</option></select></label><button id="tg-new" type="button">New problem</button><button id="tg-class" type="button" data-i="1">Class sheet: problem 2</button></div>
+<div class="gp-ansrow"><input autocapitalize="off" autocomplete="off" id="tg-own" placeholder="or type your own, e.g. y = -3/2 cos(1/2 x) - 2" spellcheck="false" type="text"/><button id="tg-own-go" type="button">Use my equation</button></div>
+<div class="tg-card pp-card"><div class="tg-prompt">Graph the trigonometric function. Clearly plot all points corresponding to x-intercepts (midline points), minima, and maxima within one cycle. Use the table to clearly state those points <i>and</i> the parent function's points.</div><div class="tg-eq pp-sheet" id="tg-eq"></div>
+<div class="tg-wrap"><div class="tg-graphcol"><div id="tg-graph"></div><p class="small" id="tg-plotted">Tap the graph to plot a point; tap it again to remove it.</p></div><div class="tg-tablecol" id="tg-tablebox"></div></div></div>
+<div class="gp-tools"><button class="eh-go" id="tg-check" type="button">Check my table and points</button><button id="tg-next" type="button">Start step by step</button><button id="tg-all" type="button">Show all steps</button><button id="tg-clear" type="button">Clear my work</button></div>
+<div aria-live="polite" class="gp-msg" id="tg-msg"></div>
+<div id="tg-steps"></div>
 </section>
 <section id="graph-practice">
 <h2>Graph → Equation Practice</h2>
@@ -1582,7 +1622,7 @@ points in precalculus than anything in Parts D or E.</div>
 <div aria-labelledby="st-tab-own" class="st-panel" data-mode="own" hidden="" id="st-panel-own" role="tabpanel">
 <label class="eh-label" for="st-own">Type an equation, a function, or a value</label>
 <div class="st-ownrow"><input autocapitalize="off" autocomplete="off" id="st-own" placeholder="e.g. y = -2 - 2sin(3/4x - 4)" spellcheck="false" type="text"/><button class="st-primary" id="st-own-go" type="button">Practise it</button></div>
-<p class="small">Typing: <code>^</code> for powers, <code>sqrt()</code> or <code>√</code>, <code>pi</code>, <code>log_2(x)</code>, <code>ln x</code>, <code>sin^-1 x</code>, <code>30°</code>. It works with linear and quadratic equations; <code>f(x) = …</code> for inverses, domains and rational functions; <code>y = A sin(Bx − C) + D</code> graphs; exponential and log equations; trig equations on [0, 2π); exact values like <code>cos(5π/6)</code>, <code>sin(75°)</code>, <code>sin⁻¹(−1/2)</code>, <code>sin(cos⁻¹(3/5))</code>; and angles like <code>935°</code>.</p>
+<p class="small">Typing: <code>^</code> for powers, <code>sqrt()</code> or <code>√</code>, <code>π</code> (typing pi turns into π), <code>log_2(x)</code>, <code>ln x</code>, <code>sin^-1 x</code>, <code>30°</code>. It works with linear and quadratic equations; <code>f(x) = …</code> for inverses, domains and rational functions; <code>y = A sin(Bx − C) + D</code> graphs; exponential and log equations; trig equations on [0, 2π); exact values like <code>cos(5π/6)</code>, <code>sin(75°)</code>, <code>sin⁻¹(−1/2)</code>, <code>sin(cos⁻¹(3/5))</code>; and angles like <code>935°</code>.</p>
 <div class="st-examples"><span class="small">Try one:</span> <button class="st-ex" data-ex="y = -2 - 2sin(3/4x - 4)" type="button">y = -2 - 2sin(3/4x - 4)</button><button class="st-ex" data-ex="3(x - 2) + 4 = 5x - 8" type="button">3(x - 2) + 4 = 5x - 8</button><button class="st-ex" data-ex="2x^2 + 5x - 3 = 0" type="button">2x^2 + 5x - 3 = 0</button><button class="st-ex" data-ex="f(x) = (2x + 1)/(x - 3)" type="button">f(x) = (2x + 1)/(x - 3)</button><button class="st-ex" data-ex="f(x) = √(2x - 6)/(x - 5)" type="button">f(x) = √(2x - 6)/(x - 5)</button><button class="st-ex" data-ex="3·5^x - 4 = 71" type="button">3·5^x - 4 = 71</button><button class="st-ex" data-ex="log_2(3x + 1) + 1 = 5" type="button">log_2(3x + 1) + 1 = 5</button><button class="st-ex" data-ex="2sin(x) + 1 = 0" type="button">2sin(x) + 1 = 0</button><button class="st-ex" data-ex="cos(5π/6)" type="button">cos(5π/6)</button><button class="st-ex" data-ex="sin(arccos(3/5))" type="button">sin(arccos(3/5))</button></div>
 <div aria-live="polite" id="st-own-out"></div>
 </div>
@@ -17408,6 +17448,83 @@ function rawV(val) { return { t: 'raw', s: val.text, val: val }; }
 EH.rawV = rawV;
 function step(steps, note, math, rule) { steps.push({ note: note, math: math, rule: rule }); }
 
+/* ---------- showing the move: helpers shared by every solver ---------- */
+function shWrapped(t) {           /* already one bracketed group? */
+  if (t.charAt(0) !== '(' || t.charAt(t.length - 1) !== ')') return false;
+  var d = 0; for (var i = 0; i < t.length; i++) { if (t[i] === '(') d++; else if (t[i] === ')') { d--; if (d === 0 && i < t.length - 1) return false; } }
+  return true;
+}
+function shTop(t) { var d = 0; for (var i = 0; i < t.length; i++) { var ch = t[i]; if (ch === '(' || ch === '[') d++; else if (ch === ')' || ch === ']') d--; else if (d === 0 && (ch === ' ' || (ch === '-' && i > 0) || ch === '+' || ch === '/')) return true; } return false; }
+function shW(t) { t = String(t); return shWrapped(t) || (!shTop(t) && !/^-/.test(t)) ? t : '(' + t + ')'; }
+function shWneg(t) { t = String(t); return /^-/.test(t) || /[ +\-]/.test(t.slice(1)) && !shWrapped(t) ? '(' + t + ')' : t; }
+function shTerms(p, X) {          /* monomials of a polynomial, highest power first, as text */
+  var out = [];
+  for (var i = p.deg(); i >= 0; i--) { var c = p.co(i); if (c.isZero()) continue; var arr = []; for (var j = 0; j < i; j++) arr.push(Q.ZERO); arr.push(c); out.push(new P(arr).text(X)); }
+  return out;
+}
+function shJoin(list) {
+  if (!list.length) return '0';
+  return list.map(function (t, i) { return i === 0 ? t : (t.charAt(0) === '-' ? ' - ' + t.slice(1) : ' + ' + t); }).join('');
+}
+function shNeg(t) { return t.charAt(0) === '-' ? t.slice(1) : '-' + t; }
+var SH = {
+  w: shW, wn: shWneg, terms: shTerms, join: shJoin, neg: shNeg,
+  /* "do the same thing to both sides" written out */
+  both: function (op, l, r, k) {
+    k = String(k);
+    if (op === 'div') return shW(l) + '/' + shW(k) + ' = ' + shW(r) + '/' + shW(k);
+    if (op === 'mul') return shW(k) + '·' + shW(l) + ' = ' + shW(k) + '·' + shW(r);
+    if (op === 'add') return l + ' + ' + shWneg(k) + ' = ' + r + ' + ' + shWneg(k);
+    if (op === 'sub') return l + ' - ' + shWneg(k) + ' = ' + r + ' - ' + shWneg(k);
+    if (op === 'sq') { var sw = function (t) { return /^[A-Za-z0-9]+$/.test(t) || shWrapped(t) ? t : '(' + t + ')'; }; return sw(l) + '² = ' + sw(r) + '²'; }
+    return l + ' = ' + r;
+  },
+  /* move every term to the left, each with its sign changed: "x + 7 - x² - 2x - 1 = 0" */
+  allLeft: function (lp, rp, X) { return shJoin(shTerms(lp, X).concat(shTerms(rp, X).map(shNeg))) + ' = 0'; },
+  /* linear: x-terms left, numbers right, every moved term written with its new sign */
+  linear: function (lp, rp, X, rel) {
+    var L = [], R = [];
+    if (!lp.co(1).isZero()) L.push(new P([Q.ZERO, lp.co(1)]).text(X));
+    if (!rp.co(1).isZero()) L.push(shNeg(new P([Q.ZERO, rp.co(1)]).text(X)));
+    if (!rp.co(0).isZero()) R.push(rp.co(0).toString());
+    if (!lp.co(0).isZero()) R.push(shNeg(lp.co(0).toString()));
+    return shJoin(L) + ' ' + (rel || '=') + ' ' + shJoin(R);
+  },
+  /* one level of distributing / FOIL, written before combining like terms */
+  distribute: function (node, X) {
+    var changed = false;
+    function terms(n, s, out) { if (n.t === 'add') { terms(n.a, s, out); terms(n.b, s, out); } else if (n.t === 'sub') { terms(n.a, s, out); terms(n.b, -s, out); } else if (n.t === 'neg') terms(n.a, -s, out); else out.push({ s: s, n: n }); return out; }
+    function isSum(n) { return n.t === 'add' || n.t === 'sub'; }
+    function prodText(a, b) { var ta = txt(a), tb = txt(b); return shW(ta) + '·' + shW(tb); }
+    function expandTerm(t) {
+      var n = t.n;
+      if (n.t === 'pow' && isSum(n.a) && n.b.t === 'num' && n.b.q.n === 2 && n.b.q.d === 1) n = { t: 'mul', a: n.a, b: n.a };
+      if (n.t === 'mul' && (isSum(n.a) || isSum(n.b))) {
+        changed = true;
+        var A = isSum(n.a) ? terms(n.a, 1, []) : [{ s: 1, n: n.a }], Bt = isSum(n.b) ? terms(n.b, 1, []) : [{ s: 1, n: n.b }], out = [];
+        A.forEach(function (x) { Bt.forEach(function (y) { out.push({ s: t.s * x.s * y.s, txt: prodText(x.n, y.n) }); }); });
+        return out;
+      }
+      return [{ s: t.s, txt: txt(t.n) }];
+    }
+    var pieces = [];
+    terms(node, 1, []).forEach(function (t) { pieces = pieces.concat(expandTerm(t)); });
+    if (!changed) return null;
+    return pieces.map(function (pc, i) { return i === 0 ? (pc.s < 0 ? '-' : '') + pc.txt : (pc.s < 0 ? ' - ' : ' + ') + pc.txt; }).join('');
+  },
+  /* substitute an answer into the original and show both sides */
+  check: function (rel, v, val) {
+    var r = { t: 'raw', s: val.f < 0 || /[ \/]/.test(val.text) ? '(' + val.text + ')' : val.text, val: val };
+    function side(n) {
+      var sub = EH.subst(n, v, r), t = txt(sub), out;
+      try { var ev0 = EH.evaluate(sub); out = ev0.ex ? ev0.text + (ev0.ex.isRational() ? '' : ' ≈ ' + EH.fmtFloat(+ev0.f.toFixed(4))) : '≈ ' + EH.fmtFloat(+ev0.f.toFixed(4)); } catch (e) { out = 'undefined'; }
+      return t === out ? t : t + (out.charAt(0) === '≈' ? ' ' : ' = ') + out;
+    }
+    return { l: side(rel.l), r: side(rel.r) };
+  }
+};
+EH.SH = SH;
+
 function checkRoot(rel, v, x) {
   var env = {}; env[v] = x;
   var l = fval(rel.l, env), r = fval(rel.r, env);
@@ -17425,22 +17542,25 @@ function solvePolyEq(p, v, steps, opts) {
   var I = p.integerize();
   if (d === 1) {
     var x = p.co(0).neg().div(p.co(1));
-    step(steps, 'Divide both sides by the coefficient of ' + X + '.', new P([Q.ZERO, p.co(1)]).text(X) + ' = ' + p.co(0).neg().toString() + '\n' + X + ' = ' + x.toString(), 'linear');
+    var axT = new P([Q.ZERO, p.co(1)]).text(X), bT = p.co(0).neg().toString();
+    step(steps, 'Move the number term to the other side (its sign changes), then divide both sides by the coefficient of ' + X + '.', p.text(X) + ' = 0\n' + axT + ' = ' + bT + (p.co(1).isOne() ? '' : '\n' + SH.both('div', axT, bT, p.co(1)) + '\n' + X + ' = ' + x.toString()), 'linear');
     return { sols: [EH.fromQ(x)] };
   }
   if (!I.scale.isOne() && I.p.deg() === d) {
     var why = I.scale.n === -1 && I.scale.d === 1 ? 'Multiply both sides by -1 so the leading coefficient is positive.' : I.scale.isInt() ? 'Every coefficient shares the factor ' + I.scale.abs() + (I.scale.sign() < 0 ? ' (and the lead is negative)' : '') + '. Divide both sides by ' + I.scale.toString() + ' to make the numbers smaller.' : 'Multiply both sides by ' + I.scale.inv().toString() + ' to clear the fractions.';
-    step(steps, why, I.p.text(X) + ' = 0', 'simplify');
+    var kInv = I.scale.inv(), act = kInv.isInt() && kInv.n === -1 ? '-1·(' + p.text(X) + ') = -1·0' : (I.scale.isInt() ? '(' + p.text(X) + ')/' + SH.w(I.scale.toString()) + ' = 0/' + SH.w(I.scale.toString()) : SH.w(kInv.toString()) + '·(' + p.text(X) + ') = ' + SH.w(kInv.toString()) + '·0');
+    step(steps, why, act + '\n' + I.p.text(X) + ' = 0', 'simplify');
     p = I.p;
   }
   if (d === 2) {
     var a = p.co(2), b = p.co(1), c = p.co(0);
     if (b.isZero()) {
       var rhs = c.neg().div(a);
-      step(steps, 'No ' + X + ' term, so use the square-root method: isolate ' + X + '² and take ± the square root.', X + '² = ' + rhs.toString(), 'sqrt-method');
+      var ax2 = new P([Q.ZERO, Q.ZERO, a]).text(X), mc = c.neg().toString();
+      step(steps, 'No ' + X + ' term, so use the square-root method. Isolate ' + X + '²: move the number to the other side, then divide by ' + a + '.', p.text(X) + ' = 0\n' + ax2 + ' = ' + mc + (a.isOne() ? '' : '\n' + SH.both('div', ax2, mc, a) + '\n' + X + '² = ' + rhs.toString()), 'sqrt-method');
       if (rhs.sign() < 0) { step(steps, 'A square cannot be negative, so there is no real solution.', X + '² = ' + rhs + '  has no real solution', 'sqrt-method'); return { sols: [], complex: true }; }
       var r = new Val(EX.sqrt(rhs));
-      step(steps, 'Keep the ±: taking a square root of both sides gives two cases.', X + ' = ±√' + (rhs.isInt() ? rhs : '(' + rhs + ')') + ' = ±' + r.text, 'sqrt-method');
+      step(steps, 'Take the square root of both sides. Keep the ±: there are two numbers whose square is ' + rhs + '.', '√(' + X + '²) = ±√' + (rhs.isInt() ? rhs : '(' + rhs + ')') + '\n' + X + ' = ±' + r.text, 'sqrt-method');
       return { sols: r.ex.isZero() ? [r] : [new Val(r.ex.neg()), r] };
     }
     var D = b.mul(b).sub(q(4).mul(a).mul(c));
@@ -17455,7 +17575,7 @@ function solvePolyEq(p, v, steps, opts) {
     }
     /* quadratic formula */
     var twoA = q(2).mul(a);
-    step(steps, 'It does not factor nicely, so use the quadratic formula. Write a, b, c first.', 'a = ' + a + ',  b = ' + b + ',  c = ' + c + '\n' + X + ' = (-b ± √(b² - 4ac)) / (2a)', 'quad-formula');
+    step(steps, 'It does not factor nicely, so use the quadratic formula. Write a, b, c first, then put them into the formula in parentheses.', 'a = ' + a + ',  b = ' + b + ',  c = ' + c + '\n' + X + ' = (-b ± √(b² - 4ac))/(2a)\n' + X + ' = (-(' + b + ') ± √((' + b + ')² - 4(' + a + ')(' + c + ')))/(2(' + a + '))', 'quad-formula');
     step(steps, 'Discriminant first, on its own. Square b with its sign; subtracting a negative adds.', 'b² - 4ac = ' + wrapN(b) + '² - 4(' + a + ')(' + c + ') = ' + b.mul(b) + ' - ' + wrapN(q(4).mul(a).mul(c)) + ' = ' + D, 'discriminant');
     if (D.sign() < 0) {
       var sD = new Val(EX.sqrt(D.neg()));
@@ -17523,6 +17643,7 @@ function denomZeros(node, v) {
 }
 EH.denomZeros = denomZeros;
 
+function flattenTerms(n, s, out) { s = s || 1; out = out || []; if (n.t === 'add') { flattenTerms(n.a, s, out); flattenTerms(n.b, s, out); } else if (n.t === 'sub') { flattenTerms(n.a, s, out); flattenTerms(n.b, -s, out); } else out.push({ s: s, n: n }); return out; }
 function solveRational(rel, v, steps) {
   var X = v, L = toRF(rel.l, v), Rr = toRF(rel.r, v);
   if (!L || !Rr) return null;
@@ -17540,23 +17661,28 @@ function solveRational(rel, v, steps) {
     }
     var shownL = txt(rel.l), shownR = txt(rel.r);
     var expanded = lp.text(X) + ' = ' + rp.text(X);
-    if (expanded !== shownL + ' = ' + shownR) step(steps, 'Distribute and combine like terms on each side. Watch every negative sign.', expanded, 'expand');
+    if ((expanded).replace(/[\s()]/g, '') !== (shownL + ' = ' + shownR).replace(/[\s()]/g, '') || SH.distribute(rel.l, X) || SH.distribute(rel.r, X)) {
+      var dl = SH.distribute(rel.l, X), dr = SH.distribute(rel.r, X);
+      step(steps, 'Distribute (multiply every term inside the parentheses), then combine like terms on each side. Watch every negative sign.', (dl || dr ? (dl || shownL) + ' = ' + (dr || shownR) + '\n' : '') + expanded, 'expand');
+    }
     if (poly.deg() === 1) {
       res.type = 'linear-eq';
       var hasFrac = lp.c.concat(rp.c).some(function (c) { return !c.isInt(); });
       if (hasFrac) {
         var Lc = lp.c.concat(rp.c).reduce(function (a, c) { return EH.lcm(a, c.d); }, 1);
+        var lp0 = lp, rp0 = rp;
         lp = lp.scale(q(Lc)); rp = rp.scale(q(Lc));
-        step(steps, 'Clear the fractions: multiply EVERY term on both sides by the LCD, ' + Lc + '.', lp.text(X) + ' = ' + rp.text(X), 'fractions');
+        step(steps, 'Clear the fractions: multiply EVERY term on both sides by the LCD, ' + Lc + '.', Lc + '(' + lp0.text(X) + ') = ' + Lc + '(' + rp0.text(X) + ')\n' + lp.text(X) + ' = ' + rp.text(X), 'fractions');
       }
       var a = lp.co(1).sub(rp.co(1)), b = rp.co(0).sub(lp.co(0));
-      step(steps, 'Variable terms to one side, numbers to the other. Moving a term across = changes its sign.', new P([Q.ZERO, a]).text(X) + ' = ' + b, 'linear');
+      var moved = SH.linear(lp, rp, X), axL = new P([Q.ZERO, a]).text(X);
+      step(steps, 'Variable terms to one side, numbers to the other. Moving a term across = changes its sign.', lp.text(X) + ' = ' + rp.text(X) + '\n' + (moved !== axL + ' = ' + b ? moved + '\n' : '') + axL + ' = ' + b, 'linear');
       var x = b.div(a);
-      if (!a.isOne()) step(steps, 'Divide both sides by ' + a + '.', X + ' = ' + x, 'linear');
+      if (!a.isOne()) step(steps, 'Divide both sides by ' + a + '.', SH.both('div', axL, b.toString(), a) + '\n' + X + ' = ' + x, 'linear');
       res.sols = [EH.fromQ(x)];
     } else {
       res.type = poly.deg() === 2 ? 'quadratic-eq' : 'poly-eq';
-      if (!(rp.isZero())) step(steps, 'Get 0 on one side: move every term to the left and combine.', poly.text(X) + ' = 0', 'standard-form');
+      if (!(rp.isZero())) { var movedL = SH.allLeft(lp, rp, X); step(steps, 'Get 0 on one side: move every term to the left (each one changes sign), then combine like terms.', lp.text(X) + ' = ' + rp.text(X) + '\n' + movedL + (movedL === poly.text(X) + ' = 0' ? '' : '\n' + poly.text(X) + ' = 0'), 'standard-form'); }
       var r = solvePolyEq(poly, X, steps);
       res.sols = r.sols; res.complex = r.complex; res.notes = r.notes;
     }
@@ -17570,10 +17696,21 @@ function solveRational(rel, v, steps) {
   var lcd = lcmPoly(Lred.d, Rred.d);
   var lhs = Lred.n.mul(lcd.divmod(Lred.d).q), rhs = Rred.n.mul(lcd.divmod(Rred.d).q);
   var lcdF = factoredText(factorPaper(lcd, X, []), X).text || lcd.text(X);
-  step(steps, 'Multiply every term on both sides by the LCD, ' + lcdF + '. Each denominator cancels, leaving a polynomial equation.', lhs.text(X) + ' = ' + rhs.text(X), 'clear-denominators');
+  var lcdW = SH.w(lcdF), tl = flattenTerms(rel.l), tr = flattenTerms(rel.r);
+  var dist = function (ts) { return ts.map(function (t, i) { return (i === 0 ? (t.s < 0 ? '-' : '') : (t.s < 0 ? ' - ' : ' + ')) + lcdW + '·' + SH.w(txt(t.n)); }).join(''); };
+  var left = function (ts) {
+    return ts.map(function (t, i) {
+      var rf = toRF(t.n, v), body;
+      if (rf) { var qq = lcd.divmod(rf.d).q, f = (factoredText(factorPaper(qq, X, []), X).text || qq.text(X)).replace(/^1(?=[a-z(])/, ''), nt = rf.n.text(X); body = qq.isConst() ? qq.mul(rf.n).text(X) : (rf.n.isConst() && rf.n.co(0).isOne() ? f : SH.w(f) + (rf.n.isConst() ? '·' + nt : SH.w(nt))); }
+      else body = txt(t.n);
+      return (i === 0 ? (t.s < 0 ? '-' : '') : (t.s < 0 ? ' - ' : ' + ')) + (ts.length > 1 && / /.test(body) ? '(' + body + ')' : body);
+    }).join('');
+  };
+  var cancelled = left(tl) + ' = ' + left(tr), resultT = lhs.text(X) + ' = ' + rhs.text(X);
+  step(steps, 'Multiply every term on both sides by the LCD, ' + lcdF + '. Each denominator cancels against part of the LCD, leaving a polynomial equation.', lcdW + '·[' + txt(rel.l) + '] = ' + lcdW + '·[' + txt(rel.r) + ']\n' + dist(tl) + ' = ' + dist(tr) + (cancelled !== resultT ? '\n' + cancelled : '') + '\n' + resultT, 'clear-denominators');
   poly = lhs.sub(rhs);
   if (poly.deg() < 1) { step(steps, poly.isZero() ? 'Everything cancels: true for every allowed x.' : 'Everything cancels to a false statement: no solution.', poly.isZero() ? '0 = 0' : 'false', 'linear'); res.identity = poly.isZero() ? 'all-but' : 'none'; res.restrictions = bad; return res; }
-  if (!rhs.isZero() && poly.deg() > 1) step(steps, 'Move everything to one side.', poly.text(X) + ' = 0', 'standard-form');
+  if (!rhs.isZero() && poly.deg() > 1) { var movedR = SH.allLeft(lhs, rhs, X); step(steps, 'Move everything to one side (each moved term changes sign), then combine like terms.', lhs.text(X) + ' = ' + rhs.text(X) + '\n' + movedR + (movedR === poly.text(X) + ' = 0' ? '' : '\n' + poly.text(X) + ' = 0'), 'standard-form'); }
   var sol = solvePolyEq(poly, X, steps);
   sol.sols.forEach(function (s) {
     if (bad.some(function (b) { return Math.abs(b.f - s.f) < 1e-9; })) res.rejected.push({ val: s, why: 'it makes a denominator 0' });
@@ -17626,33 +17763,38 @@ function neg(n) { if (isNum(n)) { var x = numVal(n); return valNode(x.ex ? new V
 function isolate(expr, target, v, steps, mode) {
   var cur = expr, br = [target], trig = null;
   var X = v;
+  var SH = EH.SH, oldCur, oldBr, act = null;
   function show(note, rule) {
-    step(steps, note, br.map(function (t) { return txt(cur) + ' = ' + txt(t); }).join('    or    '), rule);
+    var res = br.map(function (t) { return txt(cur) + ' = ' + txt(t); }).join('    or    ');
+    var a1 = act ? oldBr.map(function (t) { return act(txt(oldCur), txt(t), t); }).join('    or    ') : '';
+    step(steps, note, (a1 && a1 !== res ? a1 + '\n' : '') + res, rule);
+    act = null;
   }
   var guard = 0;
   while (!(cur.t === 'var' && cur.name === v) && guard++ < 60) {
     var a = cur.a, b = cur.b, other;
+    oldCur = cur; oldBr = br.slice();
     switch (cur.t) {
       case 'add':
         other = has(a, v) ? b : a; cur = has(a, v) ? a : b;
-        br = br.map(function (t) { return sSub(t, other, v); }); show('Subtract ' + txt(other) + ' from both sides.', 'undo'); break;
+        br = br.map(function (t) { return sSub(t, other, v); }); act = function (c, t) { return SH.both('sub', c, t, txt(other)); }; show('Subtract ' + txt(other) + ' from both sides.', 'undo'); break;
       case 'sub':
-        if (has(a, v)) { other = b; cur = a; br = br.map(function (t) { return sAdd(t, other, v); }); show('Add ' + txt(other) + ' to both sides.', 'undo'); }
-        else { other = a; cur = b; br = br.map(function (t) { return sSub(other, t, v); }); show('The variable part is being subtracted, so rearrange: ' + txt(b) + ' = ' + txt(a) + ' - (other side).', 'undo'); }
+        if (has(a, v)) { other = b; cur = a; br = br.map(function (t) { return sAdd(t, other, v); }); act = function (c, t) { return SH.both('add', c, t, txt(other)); }; show('Add ' + txt(other) + ' to both sides.', 'undo'); }
+        else { other = a; cur = b; br = br.map(function (t) { return sSub(other, t, v); }); act = function (c, t) { return txt(a) + ' - ' + SH.wn(t) + ' = ' + txt(b); }; show('The variable part is being subtracted, so move it and the other side across: ' + txt(b) + ' = ' + txt(a) + ' - (other side).', 'undo'); }
         break;
       case 'mul':
         other = has(a, v) ? b : a; cur = has(a, v) ? a : b;
-        br = br.map(function (t) { return sDiv(t, other, v); }); show('Divide both sides by ' + txt(other) + '.', 'undo'); break;
+        br = br.map(function (t) { return sDiv(t, other, v); }); act = function (c, t) { return SH.both('div', c, t, txt(other)); }; show('Divide both sides by ' + txt(other) + '.', 'undo'); break;
       case 'div':
-        if (has(a, v)) { other = b; cur = a; br = br.map(function (t) { return sMul(t, other, v); }); show('Multiply both sides by ' + txt(other) + '.', 'undo'); }
+        if (has(a, v)) { other = b; cur = a; br = br.map(function (t) { return sMul(t, other, v); }); act = function (c, t) { return SH.both('mul', c, t, txt(other)); }; show('Multiply both sides by ' + txt(other) + '.', 'undo'); }
         else {
           other = a; cur = b;
           br = br.filter(function (t) { return !(isNum(t) && numVal(t).f === 0); });
           if (!br.length) { step(steps, 'A fraction with a nonzero top can never equal 0.', txt(expr) + ' ≠ 0', 'undo'); return { sols: [] }; }
-          br = br.map(function (t) { return sDiv(other, t, v); }); show('The variable is in the denominator: flip both sides (take reciprocals).', 'undo');
+          br = br.map(function (t) { return sDiv(other, t, v); }); act = function (c, t) { return '1/' + SH.w(c) + ' = 1/' + SH.w(t); }; show('The variable is in the denominator: flip both sides (take reciprocals).', 'undo');
         }
         break;
-      case 'neg': cur = a; br = br.map(function (t) { return neg(t); }); show('Multiply both sides by -1.', 'undo'); break;
+      case 'neg': cur = a; br = br.map(function (t) { return neg(t); }); act = function (c, t) { return SH.both('mul', c, t, '-1'); }; show('Multiply both sides by -1.', 'undo'); break;
       case 'pow':
         if (has(a, v) && !has(b, v)) {
           var k = ev(b);
@@ -17670,6 +17812,7 @@ function isolate(expr, target, v, steps, mode) {
           });
           cur = a; br = nb;
           if (!br.length) { step(steps, 'An even power can never be negative, so there is no real solution.', txt(expr) + ' = ' + txt(target), 'undo'); return { sols: [] }; }
+          act = function (c, t) { return kq.isInt() && kq.n === 2 ? '√' + SH.w(c) + ' = ±√' + SH.w(t) : kq.isInt() && kq.n === 3 ? '∛' + SH.w(c) + ' = ∛' + SH.w(t) : SH.w(c) + '^(' + inv + ') = ' + (even ? '±' : '') + SH.w(t) + '^(' + inv + ')'; };
           show(kq.isInt() ? (kq.n === 2 ? 'Take the square root of both sides. Keep the ±.' : 'Take the ' + ord(kq.n) + ' root of both sides' + (even ? '. Even power, so keep the ±.' : '.')) : 'Raise both sides to the reciprocal power, ' + inv + '.', 'roots');
           if (mode === 'inverse' && even) EH._evenWarn = true;
         } else if (has(b, v) && !has(a, v)) {
@@ -17678,6 +17821,7 @@ function isolate(expr, target, v, steps, mode) {
           var bv = baseIsE || has(base, '__none__') && false ? null : tryEval(base);
           if (!baseIsE && !bv) {
             cur = b; br = br.map(function (t) { return B('div', F('ln', t), F('ln', base)); });
+            act = function (c, t) { return 'ln(' + c + ') = ln(' + t + ')\n' + SH.w(txt(b)) + '·ln(' + txt(base) + ') = ln(' + t + ')'; };
             show('Take ln of both sides and use the power rule: exponent = ln(other side) / ln(base).', 'logs');
             break;
           }
@@ -17698,6 +17842,7 @@ function isolate(expr, target, v, steps, mode) {
           });
           cur = b; br = nb2;
           if (!br.length) { step(steps, notes[0] || 'No solution.', txt(expr) + ' = ' + txt(target), 'exp'); return { sols: [] }; }
+          act = function (c, t) { var fnT = baseIsE ? 'ln' : 'log_' + SH.w(txt(base)); return fnT + '(' + c + ') = ' + fnT + '(' + t + ')'; };
           show(notes.length ? notes[0] : 'Rewrite in logarithmic form.', 'logs');
         } else throw new MathError('unsupported');
         break;
@@ -17706,6 +17851,7 @@ function isolate(expr, target, v, steps, mode) {
         if (!br.length) { step(steps, 'A square root is never negative, so there is no solution.', txt(expr) + ' = ' + txt(target), 'roots'); return { sols: [] }; }
         var rn = cur.n;
         br = br.map(function (t) { return powNode(t, q(rn), v); }); cur = a;
+        act = function (c, t) { return rn === 2 ? SH.both('sq', c, t) : SH.w(c) + '^' + rn + ' = ' + SH.w(t) + '^' + rn; };
         show(rn === 2 ? 'Square both sides to undo the square root.' : 'Raise both sides to the power ' + rn + ' to undo the root.', 'roots');
         break;
       case 'abs':
@@ -17720,10 +17866,12 @@ function isolate(expr, target, v, steps, mode) {
         if (cur.name === 'log' || cur.name === 'ln') {
           var lb = cur.name === 'ln' ? K('e') : (cur.base || num(10));
           br = br.map(function (t) { return fold(B('pow', lb, t), v); }); cur = a;
+          act = function (c, t) { var bT = txt(lb); return txt(a) + ' = ' + SH.w(bT) + '^' + SH.w(t); };
           show('Rewrite in exponential form: log_b(A) = c means A = b^c.', 'log-form');
         } else if (/^arc/.test(cur.name)) {
           var fn0 = cur.name.slice(3);
           br = br.map(function (t) { return fold(F(fn0, t), v); }); cur = a;
+          act = function (c, t) { return fn0 + '(' + c + ') = ' + fn0 + '(' + t + ')'; };
           show('Undo the inverse function by applying ' + fn0 + ' to both sides.', 'inverse-trig');
         } else if (/^(sin|cos|tan|sec|csc|cot)$/.test(cur.name)) {
           if (mode === 'solve') { trig = { node: cur, targets: br }; return { trig: trig }; }
@@ -17885,7 +18033,13 @@ function solveEquation(rel, v, steps, opts) {
         var c = EH.checkRoot(rel, v, s.f);
         if (c.ok) good.push(s); else (r.rejected = r.rejected || []).push({ val: s, why: c.why });
       });
-      if (r.rejected && r.rejected.length) step(steps, 'Check every answer in the ORIGINAL equation. ' + (res.type === 'log-eq' ? 'A log input must be positive.' : res.type === 'radical-eq' ? 'Squaring can create answers that do not work.' : 'Throw out any that fail.'), r.rejected.map(function (x) { return X + ' = ' + x.val.text + '   ✗  extraneous (' + x.why + ')'; }).join('\n'), 'extraneous');
+      var mustShow = /^(log-eq|radical-eq|abs-eq|exp-eq|rational-eq)$/.test(res.type) || (r.rejected && r.rejected.length);
+      if (mustShow && (good.length || (r.rejected && r.rejected.length))) {
+        var SH = EH.SH, lines = [];
+        good.forEach(function (s) { var c = SH.check(rel, v, s); lines.push(X + ' = ' + s.text + ':', '    left side: ' + c.l, '    right side: ' + c.r, '    ✓ the sides are equal, keep it'); });
+        (r.rejected || []).forEach(function (x) { var c = SH.check(rel, v, x.val); lines.push(X + ' = ' + x.val.text + ':', '    left side: ' + c.l, '    right side: ' + c.r, '    ✗ the sides are NOT equal: extraneous, throw it out'); });
+        step(steps, 'Check every answer in the ORIGINAL equation: substitute it into both sides. ' + (res.type === 'log-eq' ? 'A log input must be positive.' : res.type === 'radical-eq' ? 'Squaring can create answers that do not work.' : 'Throw out any that fail.'), lines.join('\n'), 'extraneous');
+      }
       r.sols = good;
     }
     r.sols = EH.dedupe(r.sols || []).sort(function (a, b) { return a.f - b.f; });
@@ -17946,7 +18100,7 @@ function solveLogs(rel, v, steps) {
     var nm = function (a) { return base.ln ? 'ln(' + txt(a) + ')' : 'log' + (base.key === '10' ? '' : '_' + base.key) + '(' + txt(a) + ')'; };
     step(steps, 'Domain first: every log input must be positive.', varLogs.map(function (l) { return txt(l.arg) + ' > 0'; }).join(',  '), 'log-domain');
     step(steps, 'Condense each side to a single log (product, quotient, and power rules).', nm(Lin) + ' = ' + nm(fold(Rin, v)), 'log-rules');
-    step(steps, 'Same base, one log on each side: the insides must be equal (logs are one-to-one).', txt(Lin) + ' = ' + txt(fold(Rin, v)), 'log-one-to-one');
+    step(steps, 'Same base, one log on each side: the insides must be equal (logs are one-to-one).', nm(Lin) + ' = ' + nm(fold(Rin, v)) + '\n' + txt(Lin) + ' = ' + txt(fold(Rin, v)), 'log-one-to-one');
     var s1 = EH.solveRational({ t: 'rel', op: '=', l: Lin, r: fold(Rin, v) }, v, steps);
     return s1 ? { sols: s1.sols } : null;
   }
@@ -17959,11 +18113,12 @@ function solveLogs(rel, v, steps) {
   logs.forEach(function (l) { var m = Math.abs(l.k.n); for (var i = 0; i < m; i++) (l.k.n > 0 ? numP : denP).push(l.arg); });
   var prod = function (arr) { if (!arr.length) return num(1); var o = arr[0]; for (var i = 1; i < arr.length; i++) o = B('mul', o, arr[i]); return o; };
   var inside = denP.length ? B('div', prod(numP), prod(denP)) : prod(numP);
-  if (logs.length > 1 || !logs[0].k.isOne()) step(steps, 'Condense to ONE log: coefficients become exponents (power rule), + becomes × (product rule), - becomes ÷ (quotient rule).', lname(inside) + ' = ' + C.text, 'log-rules');
+  if (logs.length > 1 || !logs[0].k.isOne()) step(steps, 'Condense to ONE log: coefficients become exponents (power rule), + becomes × (product rule), - becomes ÷ (quotient rule). Constants go to the other side.', txt(rel.l) + ' = ' + txt(rel.r) + '\n' + lname(inside) + ' = ' + C.text, 'log-rules');
   var rhsVal;
   if (base.ln) rhsVal = C.ex && C.ex.isZero() ? EH.fromQ(Q.ONE) : new Val(null, Math.exp(C.f), 'e^' + (C.text.length > 1 ? '(' + C.text + ')' : C.text));
   else rhsVal = tryEval(B('pow', base.node, valNode(C))) || new Val(null, Math.pow(ev(base.node).f, C.f));
-  step(steps, 'Rewrite in exponential form: log_b(A) = c means A = b^c.', txt(inside) + ' = ' + (base.ln ? 'e' : base.key) + '^' + (C.text.length > 1 ? '(' + C.text + ')' : C.text) + ' = ' + rhsVal.text, 'log-form');
+  var expT = (base.ln ? 'e' : base.key) + '^' + (C.text.length > 1 ? '(' + C.text + ')' : C.text);
+  step(steps, 'Rewrite in exponential form: log_b(A) = c means A = b^c. Then work out the power.', lname(inside) + ' = ' + C.text + '\n' + txt(inside) + ' = ' + expT + (expT === rhsVal.text ? '' : '\n' + txt(inside) + ' = ' + rhsVal.text), 'log-form');
   var newRel = { t: 'rel', op: '=', l: inside, r: valNode(rhsVal) };
   if (!rhsVal.ex) {
     var r0 = EH.toRF(inside, v);
@@ -17987,7 +18142,8 @@ function solveExps(rel, v, steps) {
       if (pa && pb && pa.base.eq(pb.base) && !pa.base.isOne()) {
         var Bt = pa.base.toString();
         var e1 = B('mul', num(pa.exp), a.pow.b), e2 = B('mul', num(pb.exp), b.pow.b);
-        step(steps, 'Same-base method: ' + ba.text + ' = ' + Bt + EH.sup(pa.exp) + ' and ' + bb.text + ' = ' + Bt + EH.sup(pb.exp) + '. Rewrite both sides with base ' + Bt + ', then multiply exponents (power of a power).', Bt + '^(' + txt(e1) + ') = ' + Bt + '^(' + txt(e2) + ')', 'same-base');
+        var e1s = EH.toRF(e1, v), e2s = EH.toRF(e2, v), e1t = e1s && e1s.isPoly() ? e1s.poly().text(v) : txt(e1), e2t = e2s && e2s.isPoly() ? e2s.poly().text(v) : txt(e2);
+        step(steps, 'Same-base method: ' + ba.text + ' = ' + Bt + EH.sup(pa.exp) + ' and ' + bb.text + ' = ' + Bt + EH.sup(pb.exp) + '. Rewrite both sides with base ' + Bt + ', then multiply exponents (power of a power).', txt(L) + ' = ' + txt(R) + '\n(' + Bt + EH.sup(pa.exp) + ')^(' + txt(a.pow.b) + ') = (' + Bt + EH.sup(pb.exp) + ')^(' + txt(b.pow.b) + ')\n' + Bt + '^(' + txt(e1) + ') = ' + Bt + '^(' + txt(e2) + ')' + (e1t !== txt(e1) || e2t !== txt(e2) ? '\n' + Bt + '^(' + e1t + ') = ' + Bt + '^(' + e2t + ')' : ''), 'same-base');
         step(steps, 'Same base on both sides, so the exponents are equal.', txt(e1) + ' = ' + txt(e2), 'same-base');
         var sub = EH.solveRational({ t: 'rel', op: '=', l: e1, r: e2 }, v, steps);
         return sub ? { sols: sub.sols } : null;
@@ -17999,7 +18155,11 @@ function solveExps(rel, v, steps) {
         step(steps, 'The bases are not powers of the same number, so take the log of both sides and use the power rule to bring the exponents down.', '(' + A1.text(v) + ')·log(' + ba.text + ') = (' + B1.text(v) + ')·log(' + bb.text + ')', 'logs');
         var coef = A1.co(1).val() * lnA - B1.co(1).val() * lnB, rhs = B1.co(0).val() * lnB - A1.co(0).val() * lnA;
         var x = rhs / coef;
-        step(steps, 'Distribute, collect the ' + v + ' terms, and divide. Keep the logs exact until the last step.', v + ' = ' + EH.fmtFloat(+x.toFixed(6)), 'logs');
+        var lt = function (k, b) { return k === 1 ? 'log(' + b + ')' : k === -1 ? '-log(' + b + ')' : k + '·log(' + b + ')'; };
+        var a1 = A1.co(1).val(), a0 = A1.co(0).val(), b1 = B1.co(1).val(), b0 = B1.co(0).val();
+        var numT = [b0 ? lt(b0, bb.text) : '', a0 ? lt(-a0, ba.text) : ''].filter(Boolean).join(' + ').replace(/\+ -/g, '- ') || '0';
+        var denT = [a1 ? lt(a1, ba.text) : '', b1 ? lt(-b1, bb.text) : ''].filter(Boolean).join(' + ').replace(/\+ -/g, '- ');
+        step(steps, 'Distribute, collect the ' + v + ' terms on one side, factor ' + v + ' out, and divide. Keep the logs exact until the last step.', v + '(' + denT + ') = ' + numT + '\n' + v + ' = (' + numT + ')/(' + denT + ')\n' + v + ' ≈ ' + EH.fmtFloat(+x.toFixed(6)), 'logs');
         return { sols: [new Val(null, x, EH.fmtFloat(+x.toFixed(6)))] };
       }
     }
@@ -18053,11 +18213,20 @@ function solveRadical(rel, v, steps, rnode) {
   var cv = ev(coef);
   if (!cv.isRational() || cv.rat().isZero()) return null;
   if (!cv.rat().isOne()) rhs = B('div', rhs, N(cv.rat()));
-  step(steps, 'Isolate the radical on one side first.', txt(rnode) + ' = ' + txt(rhs), 'isolate-radical');
+  var SH = EH.SH, radOnLeft = has(rel.l, v) && EH.find(rel.l, function (n) { return n === rnode; }).length > 0;
+  var radSide = radOnLeft ? rel.l : rel.r, otherSide = radOnLeft ? rel.r : rel.l;
+  var others = flattenSum(radSide).filter(function (t) { return t.n !== rnode && !(t.n.t === 'mul' && t.n.b === rnode); });
+  var moveT = others.map(function (t) { return (t.s > 0 ? ' - ' : ' + ') + SH.wn(txt(t.n)); }).join('');
+  var rhsRaw = txt(rhs), rhsC = EH.toRF(rhs, v);
+  if (rhsC && rhsC.isPoly()) rhs = rhsC.poly().toAST(v);
+  var isoLines = txt(rel.l) + ' = ' + txt(rel.r) + (others.length ? '\n' + txt(radSide) + moveT + ' = ' + txt(otherSide) + moveT : '') + '\n' + txt(rnode) + ' = ' + rhsRaw + (rhsRaw !== txt(rhs) ? '\n' + txt(rnode) + ' = ' + txt(rhs) : '');
+  if (!others.length && cv.rat().isOne() && txt(radSide) === txt(rnode)) step(steps, 'The radical is already alone on one side.', txt(rnode) + ' = ' + txt(rhs), 'isolate-radical');
+  else step(steps, 'Isolate the radical on one side first: move every other term across (each one changes sign)' + (cv.rat().isOne() ? '' : ', then divide by ' + cv.text) + '.', isoLines, 'isolate-radical');
   var sq = B('pow', rhs, num(2));
   var rhsRF = EH.toRF(sq, v);
   if (!rhsRF) return null;
-  step(steps, 'Square both sides. (Squaring can create extraneous answers, so every answer gets checked at the end.)', txt(rnode.a) + ' = ' + (rhsRF.isPoly() ? rhsRF.poly().text(v) : txt(sq)), 'square-both');
+  var foil = SH.distribute(sq, v);
+  step(steps, 'Square both sides. The square undoes the root on the left; on the right, (A)² means (A)(A): multiply it out, never just square each term. (Squaring can create extraneous answers, so every answer gets checked at the end.)', SH.both('sq', txt(rnode), txt(rhs)) + '\n' + txt(rnode.a) + ' = ' + (foil ? SH.w(txt(rhs)) + SH.w(txt(rhs)) + '\n' + txt(rnode.a) + ' = ' + foil + '\n' : '') + txt(rnode.a) + ' = ' + (rhsRF.isPoly() ? rhsRF.poly().text(v) : txt(sq)), 'square-both');
   var sub = EH.solveRational({ t: 'rel', op: '=', l: rnode.a, r: rhsRF.isPoly() ? rhsRF.poly().toAST(v) : sq }, v, steps);
   return sub ? { sols: sub.sols } : null;
 }
@@ -18066,7 +18235,7 @@ function solveAbsCases(rel, v, steps, anode) {
   terms.forEach(function (t, i) { if (t.n === anode) idx = i; });
   if (idx < 0) return null;
   var rest = sumNode(terms.filter(function (_, i) { return i !== idx; }).map(function (t) { return { s: -terms[idx].s * t.s, n: t.n }; }));
-  step(steps, 'Isolate the absolute value, then split into two cases: inside = right side, or inside = -(right side).', txt(anode) + ' = ' + txt(rest), 'abs');
+  step(steps, 'Isolate the absolute value (move every other term across, each changes sign), then split into two cases: inside = right side, or inside = -(right side).', txt(rel.l) + ' = ' + txt(rel.r) + '\n' + txt(anode) + ' = ' + txt(rest) + '\n' + txt(anode.a) + ' = ' + txt(rest) + '    or    ' + txt(anode.a) + ' = -' + EH.SH.w(txt(rest)), 'abs');
   var sols = [];
   [rest, U('neg', rest)].forEach(function (r, i) {
     var st = [];
@@ -18317,15 +18486,16 @@ function solveInequality(rel, v, steps) {
     var isLinear = L.isPoly() && R.isPoly() && diff.poly().deg() <= 1;
     if (isLinear) {
       var lp = L.poly(), rp = R.poly(), a = lp.co(1).sub(rp.co(1)), b = rp.co(0).sub(lp.co(0));
-      if (txt(rel.l) + txt(rel.r) !== lp.text(X) + rp.text(X)) step(steps, 'Distribute and combine like terms on each side.', lp.text(X) + ' ' + EH.relSym(op) + ' ' + rp.text(X), 'expand');
+      if ((txt(rel.l) + txt(rel.r)).replace(/[\s()]/g, '') !== (lp.text(X) + rp.text(X)).replace(/[\s()]/g, '') || EH.SH.distribute(rel.l, X) || EH.SH.distribute(rel.r, X)) { var dlI = EH.SH.distribute(rel.l, X), drI = EH.SH.distribute(rel.r, X); step(steps, 'Distribute and combine like terms on each side.', (dlI || drI ? (dlI || txt(rel.l)) + ' ' + EH.relSym(op) + ' ' + (drI || txt(rel.r)) + '\n' : '') + lp.text(X) + ' ' + EH.relSym(op) + ' ' + rp.text(X), 'expand'); }
       if (a.isZero()) {
         var truth = { '<': 0 < b.val(), '>': 0 > b.val(), '<=': 0 <= b.val(), '>=': 0 >= b.val() }[op];
         step(steps, 'The variable cancels. The statement left is ' + (truth ? 'true, so every real number works.' : 'false, so nothing works.'), '0 ' + EH.relSym(op) + ' ' + b, 'linear');
         return { set: truth ? ALL : [], type: 'linear-ineq' };
       }
-      step(steps, 'Variable terms on one side, numbers on the other (same moves as an equation).', new P([Q.ZERO, a]).text(X) + ' ' + EH.relSym(op) + ' ' + b, 'linear');
+      var movedI = EH.SH.linear(lp, rp, X, EH.relSym(op)), axI = new P([Q.ZERO, a]).text(X) + ' ' + EH.relSym(op) + ' ' + b;
+      step(steps, 'Variable terms on one side, numbers on the other (same moves as an equation; each moved term changes sign).', lp.text(X) + ' ' + EH.relSym(op) + ' ' + rp.text(X) + '\n' + (movedI !== axI ? movedI + '\n' : '') + axI, 'linear');
       var x = b.div(a), flip = a.sign() < 0, nop = flip ? { '<': '>', '>': '<', '<=': '>=', '>=': '<=' }[op] : op;
-      if (!a.isOne()) step(steps, 'Divide both sides by ' + a + '.' + (flip ? ' Dividing by a NEGATIVE flips the inequality sign.' : ''), X + ' ' + EH.relSym(nop) + ' ' + x, flip ? 'flip' : 'linear');
+      if (!a.isOne()) step(steps, 'Divide both sides by ' + a + '.' + (flip ? ' Dividing by a NEGATIVE flips the inequality sign.' : ''), EH.SH.w(new P([Q.ZERO, a]).text(X)) + '/' + EH.SH.w(a.toString()) + ' ' + EH.relSym(nop) + ' ' + EH.SH.w(b.toString()) + '/' + EH.SH.w(a.toString()) + (flip ? '   (sign flipped)' : '') + '\n' + X + ' ' + EH.relSym(nop) + ' ' + x, flip ? 'flip' : 'linear');
       var xp = { f: x.val(), text: x.toString() }, set;
       if (nop === '<') set = [{ lo: NEG_INF, hi: xp, lc: false, hc: false }];
       if (nop === '<=') set = [{ lo: NEG_INF, hi: xp, lc: false, hc: true }];
@@ -18454,14 +18624,18 @@ function domainOf(body, v, steps) {
       var sol = EH.solveEquation(rel, v, sub, {});
       var pts = sol.sols.filter(function (s) { return isFinite(s.f); });
       points = points.concat(pts);
-      step(steps, 'A denominator can never be 0. Solve denominator = 0 and exclude those values.', txt(c.node) + ' ≠ 0' + (pts.length ? '   →   ' + v + ' ≠ ' + pts.map(vt).join(', ') : '   (it is never 0)'), 'domain');
+      var work = sub.map(function (x) { return x.math; }).filter(Boolean).join('\n').split('\n').filter(function (l) { return !/[✓✗]/.test(l); }).map(function (l) { return l.replace(/ = (?!.*:)/g, ' ≠ ').replace(/ ≠ 0$/, ' ≠ 0'); });
+      if (work.length && work[0].replace(/\s/g, '') === (txt(c.node) + '≠0').replace(/\s/g, '')) work.shift();
+      step(steps, 'A denominator can never be 0. Solve denominator = 0 the usual way, then EXCLUDE those values.', txt(c.node) + ' ≠ 0' + (work.length ? '\n' + work.join('\n') : '') + (pts.length ? (work.length && work[work.length - 1].replace(/\s/g, '') === (v + '≠' + pts.map(vt).join(',')).replace(/\s/g, '') ? '' : '\n' + v + ' ≠ ' + pts.map(vt).join(', ')) : '   (it is never 0)'), 'domain');
     } else if (c.kind === 'ge0' || c.kind === 'gt0') {
       var inDen = c.kind === 'gt0' || conds.some(function (d) { return d.kind === 'ne0' && d.node.t === 'root' && txt(d.node.a) === txt(c.node); });
       var op = inDen ? '>' : '>=';
       r = EH.solveInequality({ t: 'rel', op: op, l: c.node, r: num(0) }, v, sub);
       if (!r) { notes.push('Could not solve ' + txt(c.node) + ' ' + EH.relSym(op) + ' 0 automatically.'); return; }
       var why = c.kind === 'gt0' && EH.find(body, function (n) { return n.t === 'fn' && (n.name === 'log' || n.name === 'ln') && n.a === c.node; }).length ? 'A log input must be strictly positive.' : inDen ? 'An even root in a denominator must be strictly positive (it cannot be 0 either).' : 'The inside of an even root must be ≥ 0.';
-      step(steps, why, txt(c.node) + ' ' + EH.relSym(op) + ' 0   →   ' + EH.setText(r.set) + (sub.length > 2 ? '\n' + sub.slice(-2).map(function (s) { return s.math; }).join('\n') : ''), 'domain');
+      var workI = sub.map(function (x) { return x.math; }).filter(Boolean).join('\n').split('\n');
+      if (workI.length && workI[0].replace(/\s/g, '') === (txt(c.node) + EH.relSym(op) + '0').replace(/\s/g, '')) workI.shift();
+      step(steps, why, txt(c.node) + ' ' + EH.relSym(op) + ' 0' + (workI.length ? '\n' + workI.join('\n') : '') + '\nin interval notation:   ' + EH.setText(r.set), 'domain');
       set = EH.intersect(set, r.set);
     } else if (c.kind === 'between') {
       var r1 = EH.solveInequality({ t: 'rel', op: '>=', l: c.node, r: num(-1) }, v, []), r2 = EH.solveInequality({ t: 'rel', op: '<=', l: c.node, r: num(1) }, v, []);
@@ -18520,7 +18694,16 @@ function features(body, v, steps, fam) {
     var half = b.div(a).div(q(2));
     var inside = 'x² ' + (b.div(a).sign() < 0 ? '- ' : '+ ') + b.div(a).abs() + 'x';
     var vf = (a.isOne() ? '' : a.n === -1 && a.d === 1 ? '-' : (a.isInt() ? a : '(' + a + ')')) + '(' + X + (h.sign() > 0 ? ' - ' + h : h.sign() < 0 ? ' + ' + h.neg() : '') + ')²' + (kk.sign() > 0 ? ' + ' + kk : kk.sign() < 0 ? ' - ' + kk.neg() : '');
-    step(steps, 'Vertex form by completing the square: factor a out of the x-terms, add (half of the x-coefficient)² inside, and subtract a·(that) outside to stay balanced.', (a.isOne() ? '' : a + '(' + inside.replace(/x/g, X) + ') ' + (c.sign() < 0 ? '- ' + c.neg() : '+ ' + c) + '\n') + 'half of ' + b.div(a) + ' is ' + half + ', squared ' + half.mul(half) + '\n' + 'y = ' + vf, 'complete-square');
+    var ba = b.div(a), sqv = half.mul(half), aT = a.isOne() ? '' : a.n === -1 && a.d === 1 ? '-' : (a.isInt() ? String(a) : '(' + a + ')');
+    var cT = c.isZero() ? '' : (c.sign() < 0 ? ' - ' + c.neg() : ' + ' + c);
+    var inner = new P([Q.ZERO, ba, Q.ONE]).text(X), withSq = new P([sqv, ba, Q.ONE]).text(X), aSq = a.mul(sqv);
+    var cs = ['y = ' + p2.text(X)];
+    if (!a.isOne()) cs.push('y = ' + aT + '(' + inner + ')' + cT + '        (factor ' + a + ' out of the ' + X + '-terms)');
+    cs.push('half of ' + ba + ' is ' + half + ',   (' + half + ')² = ' + sqv);
+    cs.push('y = ' + aT + '(' + inner + ' + ' + sqv + ' - ' + sqv + ')' + cT + '        (add and subtract ' + sqv + ' inside)');
+    cs.push('y = ' + aT + '(' + withSq + ')' + (aSq.sign() > 0 ? ' - ' + aSq : ' + ' + aSq.neg()) + cT + '        (move the subtracted ' + sqv + ' outside: times ' + a + ')');
+    cs.push('y = ' + vf + '        (perfect square; combine the numbers)');
+    step(steps, 'Vertex form by completing the square: factor a out of the x-terms, add AND subtract (half of the x-coefficient)² inside so nothing changes, then write the perfect square.', cs.join('\n'), 'complete-square');
     var roots = EH.polyRoots(p2), D = b.mul(b).sub(q(4).mul(a).mul(c));
     var xi = roots.roots.map(function (r) { return '(' + r.val.text + ', 0)'; }).join(' and ');
     step(steps, 'x-intercepts: solve f(x) = 0. The discriminant b² - 4ac = ' + D + ' says ' + (D.sign() > 0 ? 'two' : D.sign() === 0 ? 'one (the vertex touches)' : 'none') + '.', xi || 'no x-intercepts', 'discriminant');
@@ -18742,8 +18925,10 @@ function inverseOf(body, v, steps, fam) {
     var a = fam.rf.n.co(1), b = fam.rf.n.co(0), c = fam.rf.d.co(1), d = fam.rf.d.co(0);
     var nm = new P([b, d.neg()]), dn = new P([a.neg(), c]);
     if (dn.lead().sign() < 0) { nm = nm.neg(); dn = dn.neg(); }
-    step(steps, 'Clear the fraction: multiply both sides by the denominator.', X + '(' + new P([d, c]).text(Y) + ') = ' + new P([b, a]).text(Y), 'inverse');
-    step(steps, 'Distribute, then get every y-term on one side and everything else on the other.', new P([Q.ZERO, c]).text(Y).replace(Y, X + Y) + ' - ' + new P([Q.ZERO, a]).text(Y) + ' = ' + new P([b, d.neg()]).text(X), 'inverse');
+    var denY = new P([d, c]).text(Y), numY = new P([b, a]).text(Y);
+    step(steps, 'Clear the fraction: multiply both sides by the denominator. On the right it cancels.', '(' + denY + ')·' + X + ' = (' + denY + ')·(' + numY + ')/(' + denY + ')\n' + X + '(' + denY + ') = ' + numY, 'inverse');
+    var cxy = new P([Q.ZERO, c]).text(Y).replace(Y, X + Y), dx = new P([Q.ZERO, d]).text(X);
+    step(steps, 'Distribute, then get every y-term on one side and everything else on the other (each moved term changes sign).', cxy + (d.isZero() ? '' : (d.sign() < 0 ? ' - ' + new P([Q.ZERO, d.neg()]).text(X) : ' + ' + dx)) + ' = ' + new P([b, a]).text(Y) + '\n' + cxy + ' - ' + new P([Q.ZERO, a]).text(Y) + ' = ' + new P([b, d.neg()]).text(X), 'inverse');
     step(steps, 'Factor y out (it appears twice, so you cannot just divide), then divide.', 'y(' + new P([a.neg(), c]).text(X) + ') = ' + new P([b, d.neg()]).text(X) + '\ny = (' + nm.text(X) + ')/(' + dn.text(X) + ')', 'inverse');
     var pw = function (pp) { return pp.terms() > 1 ? '(' + pp.text(X) + ')' : pp.text(X); };
     return { text: 'f⁻¹(' + X + ') = ' + pw(nm) + '/' + pw(dn), warn: warn };
@@ -19089,6 +19274,7 @@ EH.TOPICS = {
 <script src="js/graph.js"></script>
 <script src="js/eh-trig.js"></script>
 <script src="js/eh-plus.js"></script>
+<script src="js/eh-more.js"></script>
 <script id="equation-helper-ui">
 /* ================= Equation Helper: page interface ================= */
 (function () {
@@ -19276,6 +19462,9 @@ window.EHrun = run;
 
 </script>
 <script src="js/eh-ui.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/check-work.js"></script>
+<script src="js/table-graph.js"></script>
 <div aria-hidden="true" id="mpg-print-root"></div>
 <script id="mpg-script">
 /* ================= master practice generator: math helpers ================= */

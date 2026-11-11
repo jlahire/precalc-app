@@ -68,6 +68,20 @@ function insertAt(input, ins, caret) {
   input.dispatchEvent(new Event('input'));
 }
 
+/* typing "pi" in any math box becomes the π symbol right away (the cursor stays put) */
+var NO_PI = /^(search|mpg-title|practice-skill-search|mpg-search)$/;
+document.addEventListener('input', function (e) {
+  var el = e.target;
+  if (!el || !/^(INPUT|TEXTAREA)$/.test(el.tagName) || (el.type && !/^(text|search)$/.test(el.type) && el.tagName === 'INPUT') || NO_PI.test(el.id || '') || el.type === 'search') return;
+  var v = el.value; if (!/pi/i.test(v)) return;
+  var caret = el.selectionStart, before = v.slice(0, caret == null ? v.length : caret);
+  var conv = function (t) { return t.replace(/(^|[^A-Za-z])pi/gi, '$1π'); };
+  var nb = conv(before), nv = nb + conv(v.slice(before.length));
+  if (nv === v) return;
+  el.value = nv;
+  try { el.setSelectionRange(nb.length, nb.length); } catch (err) {}
+}, true);
+
 ready(function () {
   var input = $('eh-input'), keypad = document.querySelector('#equation-helper .eh-keypad');
 

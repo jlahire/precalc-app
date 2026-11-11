@@ -173,6 +173,7 @@ if (gp) {
   $('gp-show').addEventListener('click', function () { var s = $('gp-sol'); if (!s.innerHTML) s.innerHTML = '<div class="move">' + esc(cur.solution) + '</div>'; s.hidden = !s.hidden; P.enhance(s); });
   function check() {
     var r = EH.checkGraphAnswer(cur, $('gp-answer').value);
+    if (window.Progress && cur._rec !== $('gp-answer').value && $('gp-answer').value.trim()) { cur._rec = $('gp-answer').value; Progress.record('graph', 'Graph → equation: ' + cur.famName, r.ok, { eq: cur.eq }); }
     score.tries++; if (r.ok) score.right++; saveScore();
     var m = $('gp-msg');
     m.className = 'gp-msg ' + (r.ok ? 'gp-ok' : 'gp-no');
@@ -397,6 +398,10 @@ if (msHost && !$('ws-quiz')) {
     var ok = 0, pyAll = Array.prototype.filter.call(inputs, function (i) { return itemOf(i).sec.kind === 'pyth'; }).map(function (i) { return i.value; });
     inputs.forEach(function (inp) {
       var o = itemOf(inp), r = checkWS(o.sec, o.it, inp.value, pyAll);
+      if (window.Progress && r.s !== 'empty' && inp.dataset.rec !== inp.value) {
+        inp.dataset.rec = inp.value;
+        Progress.record('identities', { recip: 'Reciprocal identities', quot: 'Quotient identities', pyth: 'Pythagorean identities', alt: 'Pythagorean alternate forms', eo: 'Even/odd identities' }[o.sec.kind], r.s === 'ok', { box: o.it[0] || 'pythagorean' });
+      }
       o.w.classList.remove('ws-ok', 'ws-bad', 'ws-warn');
       if (r.s === 'ok') { ok++; o.w.classList.add('ws-ok'); }
       else if (r.s === 'warn') o.w.classList.add('ws-warn');
@@ -465,7 +470,7 @@ if (msHost && !$('inv-quiz')) {
   var invCur = null;
   var drawInv = function (classSheet) {
     invCur = invSet(classSheet);
-    var h = ['<h3>Practice: Inverse Trigonometric Functions</h3><p class="ms-note">Part A: evaluate, giving answers in radians (type π as <code>pi</code> or use π, √ as <code>sqrt</code> or √). True or False: decide, then check. ' + (classSheet ? 'These are the questions from the class sheet.' : 'New random problems of the same kinds.') + '</p>',
+    var h = ['<h3>Practice: Inverse Trigonometric Functions</h3><p class="ms-note">Part A: evaluate, giving answers in radians (typing pi turns into π; √ as <code>sqrt</code> or √). True or False: decide, then check. ' + (classSheet ? 'These are the questions from the class sheet.' : 'New random problems of the same kinds.') + '</p>',
       '<div class="ws-title">Part A: Evaluate (give answers in radians)</div><div class="ws-grid">'];
     invCur.eval.forEach(function (p, i) {
       h.push('<div class="ws-item" data-k="e' + i + '"><label class="ws-lhs pp-sheet" for="inv-e' + i + '">' + (i + 1) + '.  ' + P.inline(p[0] + '(' + p[1] + ')') + ' =</label><input id="inv-e' + i + '" class="ws-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"/><span class="ws-prev pp-sheet" aria-hidden="true"></span><div class="ws-fb" aria-live="polite"></div><div class="ws-ans pp-sheet" hidden>' + P.inline(p[0] + '(' + p[1] + ') = ' + invExact(p[0], p[1]).text) + '</div><button type="button" class="ws-how" data-fn="' + p[0] + '" data-x="' + esc(p[1]) + '">How?</button><div class="ws-howbox" hidden></div></div>');
@@ -487,7 +492,8 @@ if (msHost && !$('inv-quiz')) {
     $('inv-check').onclick = function () {
       var ok = 0, n = 0;
       invCur.eval.forEach(function (p, i) {
-        n++; var w = iq.querySelector('[data-k="e' + i + '"]'), r = invCheck(p[0], p[1], $('inv-e' + i).value);
+        n++; var w = iq.querySelector('[data-k="e' + i + '"]'), inpE = $('inv-e' + i), r = invCheck(p[0], p[1], inpE.value);
+        if (window.Progress && r.s !== 'empty' && inpE.dataset.rec !== inpE.value) { inpE.dataset.rec = inpE.value; Progress.record('inverse-trig', p[0] + ' (evaluate)', r.s === 'ok', { q: p[0] + '(' + p[1] + ')' }); }
         w.classList.remove('ws-ok', 'ws-bad', 'ws-warn'); if (r.s !== 'empty') w.classList.add('ws-' + (r.s === 'ok' ? 'ok' : r.s));
         if (r.s === 'ok') ok++;
         w.querySelector('.ws-fb').textContent = r.s === 'ok' ? '✓' : r.s === 'empty' ? 'Blank' : r.msg;
@@ -498,6 +504,7 @@ if (msHost && !$('inv-quiz')) {
         var right = invExact(p[0], p[1]).text;
         if (!sel) { w.querySelector('.ws-fb').textContent = 'Pick True or False.'; return; }
         var good = (sel.value === 'true') === truth; if (good) ok++;
+        if (window.Progress && w.dataset.rec !== sel.value) { w.dataset.rec = sel.value; Progress.record('inverse-trig', 'Inverse trig true/false', good, { q: p[0] + '(' + p[1] + ') = ' + p[2] }); }
         w.classList.add(good ? 'ws-ok' : 'ws-bad');
         w.querySelector('.ws-fb').textContent = (good ? '✓ ' : '✗ ') + (truth ? 'True: ' + p[2] + ' is in ' + INV_RANGE[p[0]] + ' and its ' + p[0].slice(3) + ' is ' + p[1] + '.' : 'False: ' + p[2] + (Math.abs(Math[p[0].slice(3)](EH.fval(EH.parse(p[2]))) - EH.fval(EH.parse(p[1]))) < 1e-9 ? ' has the right ' + p[0].slice(3) + ' but is outside ' + INV_RANGE[p[0]] : ' does not even have ' + p[0].slice(3) + ' = ' + p[1]) + '. The answer is ' + right + '.');
       });

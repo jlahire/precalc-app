@@ -452,7 +452,8 @@ function transformTo(A, Bn, v, sideName, otherName) {
   var cur = ttxt(A2, v);
   if (combined.replace(/\s/g, '') !== cur.replace(/\s/g, '')) {
     var hasFrac = /\//.test(cur);
-    step(steps, hasFrac ? 'Combine into ONE fraction: use a common denominator (multiply each fraction top and bottom by the factor its denominator is missing), then multiply out the top.' : 'Multiply out (distribute / FOIL) and combine like terms.', '= ' + combined, hasFrac ? 'fractions' : 'distribute');
+    var lcdShow = hasFrac ? lcdLines(A2, v) : null;
+    step(steps, hasFrac ? 'Combine into ONE fraction: use a common denominator (multiply each fraction top and bottom by the factor its denominator is missing), then multiply out the top.' : 'Multiply out (distribute / FOIL) and combine like terms.', (lcdShow ? lcdShow.map(function (l) { return '= ' + l; }).join('\n') + '\n' : '') + '= ' + combined, hasFrac ? 'fractions' : 'distribute');
   }
   var found = search(rf, T, v, 4);
   if (!found) return null;
@@ -467,6 +468,37 @@ function transformTo(A, Bn, v, sideName, otherName) {
   return { steps: steps, used: identityList(usedAll) };
 }
 
+
+/* written-out common denominator: "= (sin x·sin x)/(cos x·sin x) + (cos x·cos x)/(sin x·cos x)" */
+function lcdLines(A, v) {
+  var ts = [];
+  (function flat(n, sg) { if (n.t === 'add') { flat(n.a, sg); flat(n.b, sg); } else if (n.t === 'sub') { flat(n.a, sg); flat(n.b, -sg); } else ts.push({ s: sg, n: n }); })(A, 1);
+  if (ts.length < 2) return null;
+  var parts = [];
+  for (var i = 0; i < ts.length; i++) {
+    var n = ts[i].n, nu, de;
+    if (n.t === 'div') { nu = n.a; de = n.b; }
+    else if (n.t === 'mul' && n.b.t === 'div') { nu = B('mul', n.a, n.b.a); de = n.b.b; }
+    else if (n.t === 'mul' && n.a.t === 'div') { nu = B('mul', n.a.a, n.b); de = n.a.b; }
+    else { nu = n; de = null; }
+    if (EH.find(nu, function (x) { return x.t === 'div'; }).length || (de && EH.find(de, function (x) { return x.t === 'div'; }).length)) return null;
+    parts.push({ s: ts[i].s, nu: nu, de: de });
+  }
+  var dens = [];
+  parts.forEach(function (p) { if (p.de && !dens.some(function (d) { return ttxt(d, v) === ttxt(p.de, v); })) dens.push(p.de); });
+  if (!dens.length || dens.length > 3) return null;
+  var w = function (t) { var d = 0; for (var i = 1; i < t.length; i++) { if (t[i] === '(') d++; else if (t[i] === ')') d--; else if (d === 0 && (t[i] === '+' || (t[i] === '-' && t[i - 1] === ' '))) return '(' + t + ')'; } return t; };
+  var lcdT = dens.map(function (d) { return w(ttxt(d, v)); }).join('·');
+  var line1 = [], tops = [];
+  parts.forEach(function (p, i) {
+    var miss = dens.filter(function (d) { return !p.de || ttxt(d, v) !== ttxt(p.de, v); }).map(function (d) { return w(ttxt(d, v)); });
+    var top = w(ttxt(p.nu, v)) + (miss.length ? '·' + miss.join('·') : '');
+    var own = p.de ? [w(ttxt(p.de, v))].concat(miss).join('·') : miss.join('·');
+    line1.push((i === 0 ? (p.s < 0 ? '-' : '') : (p.s < 0 ? ' - ' : ' + ')) + '(' + top + ')/(' + own + ')');
+    tops.push((i === 0 ? (p.s < 0 ? '-' : '') : (p.s < 0 ? ' - ' : ' + ')) + top);
+  });
+  return [line1.join(''), '(' + tops.join('') + ')/(' + lcdT + ')'];
+}
 function isIdentity(l, r, v) {
   var ok = 0, tries = 0;
   for (var i = 0; i < 40 && ok < 6; i++) {

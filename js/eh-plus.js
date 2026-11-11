@@ -280,7 +280,24 @@ function mine(res, info, goal, opts) {
   }
   if (goal === 'expand') {
     var p = info.family.poly;
-    step(steps, 'Distribute every term of one factor to every term of the other (FOIL for two binomials). For a power, write it as repeated multiplication first: (a + b)² = (a + b)(a + b) = a² + 2ab + b² (never a² + b²).', txt(info.body), 'distribute');
+    var SH = EH.SH, lines = [txt(info.body)], body = info.body;
+    if (body.t === 'pow' && body.b.t === 'num' && body.b.q.isInt() && body.b.q.n >= 2 && body.b.q.n <= 4) {
+      /* a power: write it as repeated multiplication, then multiply one factor at a time */
+      var base = EH.toRF(body.a, X).poly(), n = body.b.q.n, curP = base, bt = SH.w(base.text(X));
+      lines.push('= ' + new Array(n + 1).join(bt));
+      for (var k = 2; k <= n; k++) {
+        var TA = SH.terms(curP, X), TB = SH.terms(base, X), prods = [];
+        TA.forEach(function (a1) { TB.forEach(function (b1) { prods.push(SH.w(a1) + '·' + SH.w(b1)); }); });
+        lines.push('= ' + prods.join(' + ').replace(/\+ -/g, '- ') + (k < n ? '   (then times ' + bt + ' again)' : ''));
+        curP = curP.mul(base);
+        lines.push('= ' + (k < n ? SH.w(curP.text(X)) + new Array(n - k + 1).join(bt) : curP.text(X)));
+      }
+    } else {
+      var d1 = SH.distribute(body, X);
+      if (d1) lines.push('= ' + d1);
+      lines.push('= ' + p.text(X));
+    }
+    step(steps, 'Distribute every term of one factor to every term of the other (FOIL for two binomials), writing each product before combining. For a power, write it as repeated multiplication first: (a + b)² = (a + b)(a + b), never a² + b².', lines.join('\n'), 'distribute');
     step(steps, 'Combine like terms and write the powers in descending order.', '= ' + p.text(X), 'distribute');
     res.title = 'Polynomial'; A.push(txt(info.body) + ' = ' + p.text(X)); res.topics.push('factor');
   }

@@ -185,7 +185,7 @@ function html(items) {
     switch (n.t) {
       case 'sp': s += n.v.length >= 2 ? '<span class="pp-gap" style="width:' + Math.min(4, n.v.length * 0.28).toFixed(2) + 'em"></span>' : ' '; break;
       case 'num': s += word(n.v); break;
-      case 'w': s += word(esc(n.v), FN[n.v.toLowerCase()] ? 'pp-fn' : (n.v.length === 1 ? 'pp-var' : '')); break;
+      case 'w': if (n.v.toLowerCase() === 'pi') { s += glyph('π'); break; } s += word(esc(n.v), FN[n.v.toLowerCase()] ? 'pp-fn' : (n.v.length === 1 ? 'pp-var' : '')); break;
       case 'sym': s += glyph(n.v); break;
       case 'sup': s += '<sup class="pp-sup"><span class="pp-sr">^(</span>' + html(structure(group(tokenize(n.v)).items)) + '<span class="pp-sr">)</span></sup>'; break;
       case 'sub': s += '<sub class="pp-sub">' + html(structure(group(tokenize(n.v)).items)) + '</sub>'; break;
@@ -214,7 +214,24 @@ function html(items) {
 function inline(text) {
   if (text == null) return '';
   text = String(text).replace(/\t/g, '    ').replace(/ /g, ' ');
-  try { return html(structure(group(tokenize(text)).items)); }
+  try {
+    var items = structure(group(tokenize(text)).items);
+    /* keep each side of an equation in one piece: lines may only break at =, ≈, <, ≤ ... */
+    var chunks = [[]], ops = [];
+    items.forEach(function (n) {
+      if (n.t === 'sym' && /^[=≈≠<>≤≥→]$/.test(n.v)) { ops.push(n); chunks.push([]); }
+      else chunks[chunks.length - 1].push(n);
+    });
+    if (chunks.length === 1) return '<span class="pp-chunk">' + html(items) + '</span>';
+    var out = '';
+    chunks.forEach(function (c, i) {
+      while (c.length && c[0].t === 'sp') c.shift();
+      while (c.length && c[c.length - 1].t === 'sp') c.pop();
+      if (i > 0) out += ' <span class="pp-chunk">' + glyph(ops[i - 1].v) + '&nbsp;' + html(c) + '</span>';
+      else out += '<span class="pp-chunk">' + html(c) + '</span>';
+    });
+    return out;
+  }
   catch (e) { return esc(text); }
 }
 
@@ -295,6 +312,32 @@ function undoTextNodes(root) {
   root.querySelectorAll('span.pp-ink[data-pp-src]').forEach(function (s) { s.parentNode.replaceChild(document.createTextNode(s.getAttribute('data-pp-src')), s); });
 }
 
+/* ---------------- shrink-to-fit: one written line stays on one line ---------------- */
+var FIT_LINES = '.pp-line:not(.pp-prose):not(.pp-stepline), .cw-text, .ws-prev, .ws-ans, .eh-prob-text, .pp-tablewrap, .pg-tablewrap, .cw-fixline';
+var FIT_HOSTS = '.pp-block, .eh-pans, .cw-sheet, .ws-item, .eh-prob-q, .eh-echo, .pg-tablewrap, .cw-fix, .pp-card';
+var MIN_SCALE = 0.25;            /* always fit: shrink as far as needed, never scroll */
+function fitOne(el) {
+  if (!el.clientWidth) return;
+  el.style.fontSize = '';
+  var avail = el.clientWidth, need = el.scrollWidth;
+  if (need <= avail + 1) return;
+  var scale = Math.max(MIN_SCALE, avail / need * 0.98);
+  el.style.fontSize = (scale * 100).toFixed(1) + '%';
+  /* one more pass: fractions and radicals do not always scale exactly linearly */
+  if (scale > MIN_SCALE && el.scrollWidth > el.clientWidth + 1) el.style.fontSize = (Math.max(MIN_SCALE, scale * el.clientWidth / el.scrollWidth * 0.98) * 100).toFixed(1) + '%';
+}
+function fitIn(host) { if (host.matches && host.matches(FIT_LINES)) fitOne(host); host.querySelectorAll(FIT_LINES).forEach(fitOne); }
+var ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(function (ents) {
+  ents.forEach(function (en) { var w = Math.round(en.contentRect.width); if (en.target._fitW !== w) { en.target._fitW = w; fitIn(en.target); } });
+}) : null;
+function watchFit(root) {
+  (root || document).querySelectorAll(FIT_HOSTS).forEach(function (h) {
+    if (h.hasAttribute('data-fit')) return;
+    h.setAttribute('data-fit', '1');
+    if (ro) ro.observe(h); else fitIn(h);
+  });
+}
+
 /* ---------------- enhancing the page ---------------- */
 var KEY = 'precalc-paper-style';
 function enabled() { try { return localStorage.getItem(KEY) !== 'off'; } catch (e) { return true; } }
@@ -304,6 +347,7 @@ function renderMove(el) {
   el._ppOrig = el.innerHTML;
   el.innerHTML = block(el.textContent);
   el.classList.add('pp-paper');
+  watchFit(el);
 }
 function restoreMove(el) {
   if (!el.hasAttribute('data-pp')) return;
@@ -318,6 +362,7 @@ function observe(el) {
 }
 function enhance(root) {
   root = root || document;
+  if (typeof document !== 'undefined') watchFit(document);
   if (!enabled()) return;
   var moves = root.querySelectorAll ? root.querySelectorAll('.move:not([data-pp]), .stack:not([data-pp])') : [];
   moves.forEach(observe);
@@ -347,11 +392,11 @@ function init() {
   /* content added later (helper output, practice sheets, step practice) */
   var pending = false;
   new MutationObserver(function (muts) {
-    if (!enabled() || pending) return;
+    if (pending) return;
     var need = muts.some(function (m) { return m.addedNodes.length && Array.prototype.some.call(m.addedNodes, function (n) { return n.nodeType === 1 && !(n.classList && (n.classList.contains('pp-block') || n.classList.contains('pp-ink'))) && !(n.parentNode && n.parentNode.closest && n.parentNode.closest('.pp-block')); }); });
     if (!need) return;
     pending = true;
-    (global.requestAnimationFrame || setTimeout)(function () { pending = false; enhance(document); });
+    (global.requestAnimationFrame || setTimeout)(function () { pending = false; if (enabled()) enhance(document); else watchFit(document); });
   }).observe(document.body, { childList: true, subtree: true });
   setTimeout(loadAssets, 2500);
   /* printing: render everything first */
@@ -380,7 +425,7 @@ function paperize(htmlStr) {
   return t.innerHTML;
 }
 
-global.Paper = { assets: assets, paperize: paperize, inline: inline, block: block, esc: esc, enhance: enhance, textNodes: textNodes, enabled: enabled, setEnabled: setEnabled, init: init, _tok: tokenize, _struct: function (t) { return structure(group(tokenize(t)).items); } };
+global.Paper = { fit: fitIn, watchFit: watchFit, assets: assets, paperize: paperize, inline: inline, block: block, esc: esc, enhance: enhance, textNodes: textNodes, enabled: enabled, setEnabled: setEnabled, init: init, _tok: tokenize, _struct: function (t) { return structure(group(tokenize(t)).items); } };
 if (typeof document !== 'undefined') {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 }
