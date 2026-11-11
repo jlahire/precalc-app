@@ -1,0 +1,94 @@
+/* ===================== Device-aware layout (see js/device.js) ===================== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,select,input,summary,a,label{touch-action:manipulation}
+html[data-input="touch"] *{-webkit-tap-highlight-color:rgba(39,76,119,.15)}
+
+/* notch / home-indicator safe areas (iPhone, iPad, installed app) */
+body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+
+/* ---------- touch screens: phone and tablet ---------- */
+/* iOS zooms the page when a field under 16px gets focus: keep every field at 16px or more */
+html[data-input="touch"] input:not([type="checkbox"]):not([type="radio"]),html[data-input="touch"] select,html[data-input="touch"] textarea{font-size:max(16px,1em)!important}
+/* finger-sized targets (44px, Apple's guideline) */
+html[data-input="touch"] main button:not(.mpg-linkbtn):not(.toc-close),html[data-input="touch"] main select,html[data-input="touch"] .settings-dialog button,html[data-input="touch"] .settings-dialog select{min-height:44px}
+html[data-input="touch"] main summary{min-height:40px;display:flex;align-items:center}
+html[data-input="touch"] .settings-row input[type="checkbox"]{width:26px;height:26px}
+html[data-input="touch"] .eh-shortcuts{display:none}
+html[data-input="mouse"] .eh-krow-digits,html[data-input="mouse"] .eh-kbd-toggle,html[data-input="mouse"] .gp-keyrow,html[data-input="mouse"] .set-touch-only{display:none!important}
+
+/* the math keypad: an even grid of big keys */
+html[data-input="touch"] .eh-krow{display:grid;grid-template-columns:repeat(auto-fill,minmax(3.15rem,1fr));gap:.35rem}
+html[data-input="touch"] .eh-krow button{min-width:0;min-height:46px;font-size:1.12rem;padding:.2rem}
+html[data-input="touch"] .eh-krow-digits{grid-template-columns:repeat(6,1fr)}
+html[data-input="touch"] .eh-krow-digits button{font-size:1.25rem;font-weight:700;background:var(--paper)}
+.eh-kbd-toggle{white-space:nowrap;font-size:.85rem}
+.eh-kbd-toggle[aria-pressed="true"]{background:var(--soft);border-color:var(--accent);color:var(--accent)}
+html.mathkeys[data-input="touch"] #eh-input{caret-color:var(--accent)}
+.gp-keyrow{margin:.1rem 0 .5rem}
+.eh-shortcuts kbd{font:.78rem/1 "Courier New",monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:.1rem .3rem;background:var(--paper)}
+
+/* ---------- phone ---------- */
+html[data-device="phone"] main{padding-left:.6rem;padding-right:.6rem}
+html[data-device="phone"] section{padding-left:.75rem;padding-right:.75rem}
+html[data-device="phone"] .eh-panel{padding:.6rem}
+html[data-device="phone"] .eh-inputrow{flex-wrap:wrap}
+html[data-device="phone"] #eh-input{flex:1 1 100%;font-size:1.15rem!important;padding:.7rem}
+html[data-device="phone"] .eh-inputrow button{flex:1}
+/* examples: one swipeable strip instead of a wall of buttons */
+html[data-device="phone"] .eh-examples{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:.35rem;padding-bottom:.35rem;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+html[data-device="phone"] .eh-examples>*{flex:none;scroll-snap-align:start}
+html[data-device="phone"] .eh-goalrow{flex-direction:column;align-items:stretch}
+html[data-device="phone"] .eh-goalrow select{width:100%}
+html[data-device="phone"] .eh-prob-btns{display:grid;grid-template-columns:1fr 1fr}
+html[data-device="phone"] .gp-tools{display:grid;grid-template-columns:1fr 1fr}
+html[data-device="phone"] .gp-tools label{display:grid;gap:.2rem}
+html[data-device="phone"] .gp-tools #gp-score{grid-column:1/-1}
+html[data-device="phone"] .gp-ansrow input{flex:1 1 100%}
+html[data-device="phone"] .gp-ansrow button{flex:1}
+html[data-device="phone"] .eh-pstep{grid-template-columns:1.8rem minmax(0,1fr);gap:.35rem}
+html[data-device="phone"] .eh-pnum{width:1.6rem;height:1.6rem;font-size:1.1rem}
+html[data-device="phone"] .eh-allnav{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.3rem}
+html[data-device="phone"] .eh-allnav a{flex:none}
+html[data-device="phone"] .gp{border-radius:0;margin-left:-.25rem;margin-right:-.25rem;width:calc(100% + .5rem);max-width:none}
+html[data-device="phone"] .gp.ang{width:100%;margin:0 auto;max-width:360px}
+
+/* phone: the bottom action bar (Show me / Solve all / More like this) */
+#eh-dock{display:none}
+html[data-device="phone"].eh-dock-on #eh-dock{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:.4rem;position:fixed;left:0;right:0;bottom:0;z-index:30;
+  padding:.5rem calc(.6rem + env(safe-area-inset-right)) calc(.5rem + env(safe-area-inset-bottom)) calc(.6rem + env(safe-area-inset-left));
+  background:rgba(255,253,248,.97);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.08);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html[data-theme="dark"][data-device="phone"].eh-dock-on #eh-dock{background:rgba(27,34,42,.96)}
+#eh-dock button{min-height:48px;font-weight:700;font-size:.95rem;border-radius:10px;padding:.3rem}
+#eh-dock .eh-dock-main{background:var(--accent);color:#fff;border-color:var(--accent)}
+html[data-device="phone"].eh-dock-on main{padding-bottom:calc(5.5rem + env(safe-area-inset-bottom))}
+html[data-device="phone"].eh-dock-on .eh-goalrow .eh-btns{display:none}
+
+/* ---------- tablet ---------- */
+html[data-device="tablet"] .eh-krow button{min-height:48px}
+html[data-device="tablet"] .eh-examples{gap:.4rem}
+
+/* ---------- wide screens (computer, iPad landscape): input on the left, results on the right ---------- */
+@media (min-width:1150px){
+  html:not([data-device="phone"]) #equation-helper .eh-wrap{grid-template-columns:minmax(330px,410px) minmax(0,1fr);align-items:start;gap:1rem}
+  html:not([data-device="phone"]) #equation-helper .eh-panel{grid-column:1;grid-row:1 / span 2;position:sticky;top:62px;max-height:calc(100vh - 74px);overflow:auto;overscroll-behavior:contain}
+  html:not([data-device="phone"]) #equation-helper #eh-output{grid-column:2;grid-row:1;min-height:12rem}
+  html:not([data-device="phone"]) #equation-helper #eh-more{grid-column:2;grid-row:2}
+  html:not([data-device="phone"]) #equation-helper #eh-output:empty{display:flex;align-items:center;justify-content:center;border:2px dashed var(--line);border-radius:12px;color:var(--muted);padding:1.5rem;text-align:center}
+  html:not([data-device="phone"]) #equation-helper #eh-output:empty::before{content:"Your answer, graph and on-paper steps appear here. The box on the left stays put while you scroll."}
+  html:not([data-device="phone"]) #equation-helper .eh-goalrow{flex-direction:column;align-items:stretch}
+  html:not([data-device="phone"]) #equation-helper .eh-goalrow select{width:100%}
+  html:not([data-device="phone"]) #equation-helper .eh-examples{max-height:9.5rem;overflow:auto}
+}
+@media (min-width:1150px){html.tb-autohide:not([data-device="phone"]) #equation-helper .eh-panel{top:12px;max-height:calc(100vh - 24px)}}
+
+/* ---------- graph tracing ---------- */
+svg.gp[data-gid]{touch-action:pan-y;cursor:crosshair}
+.gp-trace-line{stroke:var(--pp-pencil);stroke-width:1;stroke-dasharray:2 4}
+.gp-trace-pt{fill:var(--pp-paper);stroke-width:3}
+.gp-trace-pt.gp-c0{stroke:var(--pp-ink)}.gp-trace-pt.gp-c1{stroke:var(--pp-red)}
+.gp-trace-lab{font-family:var(--pp-hand);font-size:19px;font-weight:700;fill:var(--pp-ink);paint-order:stroke;stroke:var(--pp-paper);stroke-width:5px;stroke-linejoin:round}
+.eh-fig figcaption::after{content:" Hover over a graph to read points."}
+html[data-input="touch"] .eh-fig figcaption::after{content:" Touch and drag across a graph to read points."}
+.nl+figcaption::after,.ang+figcaption::after{content:""!important}
+
+@media print{#eh-dock,.eh-kbd-toggle,.eh-krow-digits,.gp-keyrow,.eh-shortcuts{display:none!important}.gp-trace{display:none}}

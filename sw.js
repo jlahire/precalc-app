@@ -1,8 +1,9 @@
 /* Offline copy for the GitHub Pages site.
    Network first: when online you always get the newest version; offline you get the last one saved. */
-var CACHE = 'precalc-prep-v3';
+var CACHE = 'precalc-prep-v5';
 var FILES = ['./', './index.html', './precalc-prep.html', './manifest.webmanifest',
-  './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'];
+  './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png',
+  './css/paper.css', './css/device.css', './js/device.js', './fonts/caveat-latin.woff2', './js/paper.js', './js/graph.js', './js/eh-trig.js', './js/eh-plus.js', './js/eh-ui.js'];
 
 self.addEventListener('install', function(e){
   e.waitUntil(caches.open(CACHE).then(function(c){ return c.addAll(FILES); }));

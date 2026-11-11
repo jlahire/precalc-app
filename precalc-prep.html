@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <title>Precalc Prep</title>
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="icons/icon-180.png" rel="apple-touch-icon"/>
@@ -1014,6 +1014,9 @@ try {
   if (localStorage.getItem('precalc-autohide') !== '0') de.classList.add('tb-autohide');
 } catch(e){ document.documentElement.classList.add('toc-pinned','tb-autohide'); }
 </script>
+<link href="css/paper.css" rel="stylesheet"/>
+<link href="css/device.css" rel="stylesheet"/>
+<script src="js/device.js"></script>
 </head>
 <body>
 <header>
@@ -1136,6 +1139,7 @@ try {
 <a href="#pretest">Diagnostic</a>
 <a href="#workflow">How to Use This</a>
 <a href="#equation-helper">Equation Helper</a>
+<a href="#graph-practice">Graph → Equation Practice</a>
 <a href="#practice-generator">Practice Generator</a>
 <a href="#step-practice">Step-by-Step Practice</a>
 <a href="#skills-library">Skills Library</a>
@@ -1173,6 +1177,9 @@ try {
 </div>
 <div class="navgrp"><h2>Reference</h2>
 <a href="#calculator">TI-30XIIS Guide</a>
+<a href="#memory-sheet">Scrap-Paper Memory Sheet</a>
+<a class="toc-sub" href="#ws-quiz">↳ Identities drill (Question 1)</a>
+<a class="toc-sub" href="#inv-quiz">↳ Inverse trig drill</a>
 <a href="#decision">Fast Decision Tables</a><a href="#basic-math-master">Basic Math Rules</a><a href="#algebra-master">Algebra Master</a><a href="#trig-master">Trig Master</a><a href="#domain-range-master">Domain &amp; Range Master</a><a href="#rule-cheat-sheets">Rule Cheat Sheets</a>
 <a href="#glossary">Glossary</a>
 <a href="#term-index">Index (A–Z)</a>
@@ -1478,7 +1485,8 @@ points in precalculus than anything in Parts D or E.</div>
 <h2>Equation Helper</h2>
 <div class="knowledge-meta">
 <div class="knowledge-row"><span class="knowledge-label">Use this when</span><span>You have a specific problem and want the paper method, the pages that teach it, and the skills it needs.</span></div>
-<div class="knowledge-row"><span class="knowledge-label">You can enter</span><span>A number to simplify exactly, like <code>(1/4)^2</code> or <code>4π/2</code>. An equation or inequality to solve. A function like <code>f(x) = (x²-4)/(x+1)</code> to factor, graph, or invert. A formula like <code>A = P(1 + rt)</code> to solve for a letter.</span></div>
+<div class="knowledge-row"><span class="knowledge-label">You can enter</span><span>Anything from the course, typed or pasted: a number to simplify (<code>(1/4)^2</code>), an angle for coterminal and reference angles with a drawing (<code>-7π/4</code>, <code>1000°</code>), an equation or inequality to solve, a function for its domain, range, inverse, zeros or graph, a trig identity to prove (<code>prove tan(x)^2 = sec(x)^2 - 1</code>), a trig expression to simplify, logs to expand or condense, or a formula to solve for a letter. You can type the request in words, like <code>domain of f(x) = √(x-3)</code>.</span></div>
+<div class="knowledge-row"><span class="knowledge-label">Buttons</span><span><b>Show me</b> works the goal you pick. <b>Solve all</b> works every goal at once and graphs it. <b>More like this</b> makes new practice problems of the same type, with the steps and answers hidden until you ask.</span></div>
 </div>
 <div class="eh-wrap">
 <div class="eh-panel">
@@ -1488,7 +1496,7 @@ points in precalculus than anything in Parts D or E.</div>
 <div aria-label="Math keys" class="eh-keypad">
 <div class="eh-krow" role="group" aria-label="Structure"><button type="button" data-ins="(()/())" data-caret="2" title="Fraction: type the top, tap Next box, type the bottom" aria-label="Fraction: type the top, tap Next box, type the bottom"><span class="eh-frac"><span>□</span><span>□</span></span></button><button type="button" data-ins="^2" title="Square" aria-label="Square">x²</button><button type="button" data-ins="^()" data-caret="2" title="Exponent" aria-label="Exponent">xⁿ</button><button type="button" data-ins="√()" data-caret="2" title="Square root" aria-label="Square root">√</button><button type="button" data-ins="∛()" data-caret="2" title="Cube root" aria-label="Cube root">∛</button><button type="button" data-ins="(">(</button><button type="button" data-ins=")">)</button><button type="button" data-ins="||" data-caret="1" title="Absolute value" aria-label="Absolute value">|x|</button><button type="button" data-ins="π" title="Pi" aria-label="Pi">π</button><button type="button" data-ins="e" title="Euler&#x27;s number e" aria-label="Euler&#x27;s number e">e</button><button type="button" data-ins="°" title="Degrees" aria-label="Degrees">°</button></div>
 <div class="eh-krow" role="group" aria-label="Variables and operations"><button type="button" data-ins="x">x</button><button type="button" data-ins="y">y</button><button type="button" data-ins="θ">θ</button><button type="button" data-ins="+">+</button><button type="button" data-ins="-">−</button><button type="button" data-ins="*">×</button><button type="button" data-ins="/">÷</button><button type="button" data-ins="=">=</button><button type="button" data-ins="&lt;">&lt;</button><button type="button" data-ins="&gt;">&gt;</button><button type="button" data-ins="≤">≤</button><button type="button" data-ins="≥">≥</button></div>
-<div class="eh-krow" role="group" aria-label="Functions"><button type="button" data-ins="sin()" data-caret="4">sin</button><button type="button" data-ins="cos()" data-caret="4">cos</button><button type="button" data-ins="tan()" data-caret="4">tan</button><button type="button" data-ins="sin⁻¹()" data-caret="6" title="Inverse sine" aria-label="Inverse sine">sin⁻¹</button><button type="button" data-ins="cos⁻¹()" data-caret="6" title="Inverse cosine" aria-label="Inverse cosine">cos⁻¹</button><button type="button" data-ins="tan⁻¹()" data-caret="6" title="Inverse tangent" aria-label="Inverse tangent">tan⁻¹</button><button type="button" data-ins="sec()" data-caret="4">sec</button><button type="button" data-ins="csc()" data-caret="4">csc</button><button type="button" data-ins="cot()" data-caret="4">cot</button><button type="button" data-ins="log()" data-caret="4" title="Log base 10" aria-label="Log base 10">log</button><button type="button" data-ins="ln()" data-caret="3" title="Natural log" aria-label="Natural log">ln</button><button type="button" data-ins="log_()()" data-caret="5" title="Log with a base: base in the first ( ), input in the second" aria-label="Log with a base: base in the first ( ), input in the second">log<sub>b</sub></button></div>
+<div class="eh-krow" role="group" aria-label="Functions"><button type="button" data-ins="sin()" data-caret="4">sin</button><button type="button" data-ins="cos()" data-caret="4">cos</button><button type="button" data-ins="tan()" data-caret="4">tan</button><button type="button" data-ins="sin⁻¹()" data-caret="6" title="Inverse sine" aria-label="Inverse sine">sin⁻¹</button><button type="button" data-ins="cos⁻¹()" data-caret="6" title="Inverse cosine" aria-label="Inverse cosine">cos⁻¹</button><button type="button" data-ins="tan⁻¹()" data-caret="6" title="Inverse tangent" aria-label="Inverse tangent">tan⁻¹</button><button type="button" data-ins="sec⁻¹()" data-caret="6" title="Inverse secant" aria-label="Inverse secant">sec⁻¹</button><button type="button" data-ins="csc⁻¹()" data-caret="6" title="Inverse cosecant" aria-label="Inverse cosecant">csc⁻¹</button><button type="button" data-ins="cot⁻¹()" data-caret="6" title="Inverse cotangent" aria-label="Inverse cotangent">cot⁻¹</button><button type="button" data-ins="sec()" data-caret="4">sec</button><button type="button" data-ins="csc()" data-caret="4">csc</button><button type="button" data-ins="cot()" data-caret="4">cot</button><button type="button" data-ins="log()" data-caret="4" title="Log base 10" aria-label="Log base 10">log</button><button type="button" data-ins="ln()" data-caret="3" title="Natural log" aria-label="Natural log">ln</button><button type="button" data-ins="log_()()" data-caret="5" title="Log with a base: base in the first ( ), input in the second" aria-label="Log with a base: base in the first ( ), input in the second">log<sub>b</sub></button></div>
 <div class="eh-krow" role="group" aria-label="Edit"><button type="button" data-act="next" title="Jump to the next empty box, or past the next closing bracket" aria-label="Jump to the next empty box, or past the next closing bracket" class="eh-k-edit">Next box ⇥</button><button type="button" data-act="left" title="Move cursor left" aria-label="Move cursor left" class="eh-k-edit">◀</button><button type="button" data-act="right" title="Move cursor right" aria-label="Move cursor right" class="eh-k-edit">▶</button><button type="button" data-act="back" title="Delete" aria-label="Delete" class="eh-k-edit">⌫</button><button type="button" data-act="clear" title="Clear everything" aria-label="Clear everything" class="eh-k-edit">Clear</button></div>
 </div>
 <p class="small eh-typing">Typing works too: <code>^</code> for powers, <code>sqrt()</code> or <code>√</code>, <code>pi</code>, <code>log_2(x)</code>, <code>sin^2 x</code>, <code>30°</code>. Multiplication can be implied: <code>2x</code>, <code>3(x+1)</code>, <code>4pi</code>.</p>
@@ -1497,13 +1505,25 @@ points in precalculus than anything in Parts D or E.</div>
 <select id="eh-goal"><option value="">—</option></select>
 <span class="eh-extra" hidden="" id="eh-extra-at"><label><span class="eh-at-var">x =</span> <input id="eh-at" size="7" type="text"/></label></span>
 <span class="eh-extra" hidden="" id="eh-extra-int"><label>Interval <select id="eh-interval"><option value="rad">[0, 2π) radians</option><option value="deg">[0°, 360°) degrees</option><option value="all">All solutions</option></select></label></span>
-<button class="eh-go" id="eh-go" type="button">Show me</button>
+<span class="eh-btns"><button class="eh-go" id="eh-go" type="button">Show me</button><button class="eh-alt" id="eh-all" type="button">Solve all</button><button class="eh-alt" id="eh-similar" type="button">More like this</button></span>
 </div>
-<div class="eh-examples"><span class="small">Try one:</span> <button type="button" class="eh-ex" data-ex="(1/4)^2">(1/4)^2</button><button type="button" class="eh-ex" data-ex="4π/2">4π/2</button><button type="button" class="eh-ex" data-ex="√50 + √18">√50 + √18</button><button type="button" class="eh-ex" data-ex="sin(210°)">sin(210°)</button><button type="button" class="eh-ex" data-ex="log_2(32)">log_2(32)</button><button type="button" class="eh-ex" data-ex="2x^2 + 5x - 3 = 0">2x^2 + 5x - 3 = 0</button><button type="button" class="eh-ex" data-ex="x^2 - 6x + 7 = 0">x^2 - 6x + 7 = 0</button><button type="button" class="eh-ex" data-ex="1/x + 1/(x-2) = 4/(x^2-2x)">1/x + 1/(x-2) = 4/(x^2-2x)</button><button type="button" class="eh-ex" data-ex="4^(x+1) = 8^(x-2)">4^(x+1) = 8^(x-2)</button><button type="button" class="eh-ex" data-ex="log_2(x) + log_2(x-2) = 3">log_2(x) + log_2(x-2) = 3</button><button type="button" class="eh-ex" data-ex="2sin(x)^2 - sin(x) - 1 = 0">2sin(x)^2 - sin(x) - 1 = 0</button><button type="button" class="eh-ex" data-ex="|2x - 5| &lt; 7">|2x - 5| &lt; 7</button><button type="button" class="eh-ex" data-ex="x^3 + 4x^2 - 9x - 36" data-goal="factor">x^3 + 4x^2 - 9x - 36</button><button type="button" class="eh-ex" data-ex="f(x) = (x^2-4)/(x^2-x-6)" data-goal="features">f(x) = (x^2-4)/(x^2-x-6)</button><button type="button" class="eh-ex" data-ex="y = 3sin(2x - π) + 1" data-goal="features">y = 3sin(2x - π) + 1</button><button type="button" class="eh-ex" data-ex="f(x) = √(2x-6)/(x-5)" data-goal="domain">f(x) = √(2x-6)/(x-5)</button><button type="button" class="eh-ex" data-ex="f(x) = (3x-1)/(x+2)" data-goal="inverse">f(x) = (3x-1)/(x+2)</button><button type="button" class="eh-ex" data-ex="A = P(1 + rt)" data-goal="solve:r">A = P(1 + rt)</button></div>
+<div class="eh-examples"><span class="small">Try one:</span> <button type="button" class="eh-ex" data-ex="(1/4)^2">(1/4)^2</button><button type="button" class="eh-ex" data-ex="4π/2">4π/2</button><button type="button" class="eh-ex" data-ex="√50 + √18">√50 + √18</button><button type="button" class="eh-ex" data-ex="sin(210°)">sin(210°)</button><button type="button" class="eh-ex" data-ex="log_2(32)">log_2(32)</button><button type="button" class="eh-ex" data-ex="2x^2 + 5x - 3 = 0">2x^2 + 5x - 3 = 0</button><button type="button" class="eh-ex" data-ex="x^2 - 6x + 7 = 0">x^2 - 6x + 7 = 0</button><button type="button" class="eh-ex" data-ex="1/x + 1/(x-2) = 4/(x^2-2x)">1/x + 1/(x-2) = 4/(x^2-2x)</button><button type="button" class="eh-ex" data-ex="4^(x+1) = 8^(x-2)">4^(x+1) = 8^(x-2)</button><button type="button" class="eh-ex" data-ex="log_2(x) + log_2(x-2) = 3">log_2(x) + log_2(x-2) = 3</button><button type="button" class="eh-ex" data-ex="2sin(x)^2 - sin(x) - 1 = 0">2sin(x)^2 - sin(x) - 1 = 0</button><button type="button" class="eh-ex" data-ex="|2x - 5| &lt; 7">|2x - 5| &lt; 7</button><button type="button" class="eh-ex" data-ex="x^3 + 4x^2 - 9x - 36" data-goal="factor">x^3 + 4x^2 - 9x - 36</button><button type="button" class="eh-ex" data-ex="f(x) = (x^2-4)/(x^2-x-6)" data-goal="features">f(x) = (x^2-4)/(x^2-x-6)</button><button type="button" class="eh-ex" data-ex="y = 3sin(2x - π) + 1" data-goal="features">y = 3sin(2x - π) + 1</button><button type="button" class="eh-ex" data-ex="f(x) = √(2x-6)/(x-5)" data-goal="domain">f(x) = √(2x-6)/(x-5)</button><button type="button" class="eh-ex" data-ex="f(x) = (3x-1)/(x+2)" data-goal="inverse">f(x) = (3x-1)/(x+2)</button><button type="button" class="eh-ex" data-ex="A = P(1 + rt)" data-goal="solve:r">A = P(1 + rt)</button><button type="button" class="eh-ex" data-ex="-7π/4" data-goal="angle">-7π/4 (coterminal)</button><button type="button" class="eh-ex" data-ex="1000°" data-goal="angle">1000°</button><button type="button" class="eh-ex" data-ex="sin(x)tan(x) + cos(x) = sec(x)" data-goal="prove">prove sin x tan x + cos x = sec x</button><button type="button" class="eh-ex" data-ex="cos(x)/(1 - sin(x)) = sec(x) + tan(x)" data-goal="prove">prove cos x/(1 - sin x) = sec x + tan x</button><button type="button" class="eh-ex" data-ex="sec(x)cos(x) - sin(x)^2" data-goal="simplify-trig">simplify sec x cos x - sin²x</button><button type="button" class="eh-ex" data-ex="log_2(8x^3/√y)" data-goal="expand-log">expand log₂(8x³/√y)</button><button type="button" class="eh-ex" data-ex="2log(x) + log(y) - 3log(z)" data-goal="condense-log">condense 2log x + log y - 3log z</button><button type="button" class="eh-ex" data-ex="sin(cos⁻¹(3/5))">sin(cos⁻¹(3/5))</button></div>
 </div>
 <div aria-live="polite" class="eh-output" id="eh-output"></div>
+<div aria-live="polite" class="eh-more" id="eh-more"></div>
 </div>
 <p class="small eh-scope">Covers the course's algebra, exponential, logarithmic, and trig problem types. When something is outside what it can do exactly, it says so, or gives a numeric approximation and labels it as one.</p>
+</section>
+<section id="graph-practice">
+<h2>Graph → Equation Practice</h2>
+<div class="knowledge-meta">
+<div class="knowledge-row"><span class="knowledge-label">How it works</span><span>You get a graph. Read its features (midline, amplitude, period, shift, vertex, asymptotes) and type the equation it represents, like <code>y = -2sin(4/3x - 3) + 2</code>. Any correct equivalent form counts: it is checked against the graph at many points. A wrong answer is drawn in red on top so you can see what is off.</span></div>
+</div>
+<div class="gp-tools"><label>Type <select id="gp-family"><option value="mix">Mixed</option></select></label><label>Level <select id="gp-level"><option value="1">Basic</option><option selected="" value="2">Standard</option><option value="3">Challenge</option></select></label><button id="gp-new" type="button">New graph</button><span class="small" id="gp-score"></span></div>
+<div id="gp-host"><div id="gp-form"></div><div id="gp-graph"></div>
+<div class="gp-ansrow"><label class="small" for="gp-answer">y =</label><input autocapitalize="off" autocomplete="off" id="gp-answer" placeholder="type the equation, e.g. -2sin(2(x - π/4)) + 1" spellcheck="false" type="text"/><button class="eh-go" id="gp-check" type="button">Check</button></div>
+<div class="gp-tools"><button id="gp-hint-btn" type="button">Hint</button><button aria-pressed="false" id="gp-keys" type="button">Show key points</button><button id="gp-show" type="button">Show how to solve</button></div>
+<div aria-live="polite" class="gp-msg" id="gp-msg"></div><div class="shortcut" hidden="" id="gp-hint"></div><div hidden="" id="gp-sol"></div></div>
 </section>
 <section id="practice-generator">
 <h2>Master Practice Generator</h2>
@@ -11358,6 +11378,11 @@ All three at once (intersect):
 <p class="cheat-print-note"><b>Printing:</b> the buttons above build a clean packet with no navigation or sidebar. For a regular browser print of just this page area, use Letter portrait with background graphics off.</p>
 </section>
 
+<section class="assessment-section" id="memory-sheet">
+<h2>Scrap-Paper Memory Sheet</h2>
+<p class="lead">Everything worth writing on scrap paper the moment a test starts: the trig ratio table, every identity family, all the inverse-trig rules, log properties and domain rules. Practice rewriting each card from memory; whatever you cannot rebuild is what to study.</p>
+<div class="ms-grid" id="memory-sheet-grid"></div>
+</section>
 <section class="assessment-section rule-cheat-section" id="rule-cheat-sheets">
 <h2>Rule Cheat Sheets — What to Recognize, What Rule to Use</h2>
 <p class="lead">Use these as memory sheets: identify the problem type, apply the rule, then check the common trap. Print this section by itself from your browser if you want a compact rules packet.</p>
@@ -16175,7 +16200,7 @@ EX.prototype.format = function () {
 EH.EX = EX;
 
 /* ---------------- tokenizer ---------------- */
-var FUNCS = ['arcsin', 'arccos', 'arctan', 'asin', 'acos', 'atan', 'sin', 'cos', 'tan', 'sec', 'csc', 'cot',
+var FUNCS = ['arcsin', 'arccos', 'arctan', 'arcsec', 'arccsc', 'arccot', 'asin', 'acos', 'atan', 'sin', 'cos', 'tan', 'sec', 'csc', 'cot',
   'sqrt', 'cbrt', 'abs', 'log', 'ln', 'exp'];
 var WORDS = FUNCS.concat(['pi', 'theta', 'alpha', 'beta']);
 var SUPMAP = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-', '⁽': '(', '⁾': ')' };
@@ -16341,7 +16366,7 @@ function parse(src) {
       else if (name === 'log' && peek() && peek().t === 'num' && isOp(toks[i + 1], '(')) { base = primary(); }
       if (isOp(peek(), '^')) {                 /* sin^2 x, sin^-1 x */
         next(); var ex = unary();
-        if (ex.t === 'neg' && ex.a.t === 'num' && ex.a.q.isOne() && /^(sin|cos|tan)$/.test(name)) name = 'arc' + name;
+        if (ex.t === 'neg' && ex.a.t === 'num' && ex.a.q.isOne() && /^(sin|cos|tan|sec|csc|cot)$/.test(name)) name = 'arc' + name;
         else exp = ex;
       }
       var arg = fnArg();
@@ -16436,6 +16461,7 @@ EH.relSym = relSym;
 function fnName(n) {
   var nm = n.name;
   if (nm === 'arcsin') return 'sin⁻¹'; if (nm === 'arccos') return 'cos⁻¹'; if (nm === 'arctan') return 'tan⁻¹';
+  if (nm === 'arcsec') return 'sec⁻¹'; if (nm === 'arccsc') return 'csc⁻¹'; if (nm === 'arccot') return 'cot⁻¹';
   if (nm === 'log' && n.base) {
     if (n.base.t === 'num' && n.base.q.isInt()) return 'log' + String(n.base.q.n).split('').map(function (c) { return '₀₁₂₃₄₅₆₇₈₉'[+c]; }).join('');
     return 'log_(' + txt(n.base) + ')';
@@ -16901,6 +16927,15 @@ function evaluate(node, steps, opts) {
       if (!isDeg && a.ex && a.ex.isRational() && record) steps.push({ note: 'No π and no degree sign, so the calculator reads ' + angleText + ' as RADIANS. Use RAD mode', math: name + '(' + angleText + ') ' + approx(f), rule: 'mode' });
       return floatVal(f, name + '(' + angleText + ')');
     }
+    if (name === 'arcsec' || name === 'arccsc' || name === 'arccot') {
+      var rv = ev(n.a), base = { arcsec: 'arccos', arccsc: 'arcsin', arccot: 'arctan' }[name], short = name.slice(3);
+      if (name !== 'arccot' && Math.abs(rv.f) < 1 - 1e-12) throw new MathError(short + '⁻¹(' + rv.text + ') is undefined: the input must satisfy |x| ≥ 1 (' + short + ' is never between -1 and 1).');
+      if (name === 'arccot' && rv.f === 0) { rec('cot⁻¹(0): the angle in (0, π) whose cotangent is 0', 'cot⁻¹(0)', 'π/2', 'inverse-trig'); return new Val(EX.pi(q(1, 2))); }
+      var recip = EH.B('div', EH.num(1), rv.f < 0 ? { t: 'raw', s: '(' + rv.text + ')', val: rv } : NUMV(rv)), inner = EH.F(base, recip);
+      var node = name === 'arccot' && rv.f < 0 ? EH.B('add', EH.K('π'), inner) : inner;
+      if (record) steps.push({ note: 'Reciprocal relation: ' + short + '⁻¹ x = ' + base.slice(3) + '⁻¹(1/x)' + (name === 'arccot' ? ' for x > 0 (for x < 0 add π, because the range of cot⁻¹ is (0, π))' : '') + '. Calculators have no ' + short + '⁻¹ key, so this is also how you type it.', math: short + '⁻¹(' + rv.text + ') = ' + EH.txt(node), rule: 'inverse-trig' });
+      return ev(node);
+    }
     if (/^arc/.test(name)) {
       var av = ev(n.a);
       if ((name === 'arcsin' || name === 'arccos') && Math.abs(av.f) > 1 + 1e-12) throw new MathError(EH.txt(n) + ' is undefined: the input must be between -1 and 1.');
@@ -17358,6 +17393,7 @@ function fval(n, env) {
         case 'sin': return Math.sin(x); case 'cos': return Math.cos(x); case 'tan': return Math.tan(x);
         case 'sec': return 1 / Math.cos(x); case 'csc': return 1 / Math.sin(x); case 'cot': return 1 / Math.tan(x);
         case 'arcsin': return Math.asin(x); case 'arccos': return Math.acos(x); case 'arctan': return Math.atan(x);
+        case 'arcsec': return Math.abs(x) >= 1 ? Math.acos(1 / x) : NaN; case 'arccsc': return Math.abs(x) >= 1 ? Math.asin(1 / x) : NaN; case 'arccot': return x === 0 ? Math.PI / 2 : x > 0 ? Math.atan(1 / x) : Math.PI + Math.atan(1 / x);
         case 'ln': return x > 0 ? Math.log(x) : NaN;
         case 'log': var bb = n.base ? fval(n.base, env) : 10; return x > 0 ? Math.log(x) / Math.log(bb) : NaN;
       }
@@ -19049,6 +19085,10 @@ EH.TOPICS = {
 
 
 </script>
+<script src="js/paper.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/eh-trig.js"></script>
+<script src="js/eh-plus.js"></script>
 <script id="equation-helper-ui">
 /* ================= Equation Helper: page interface ================= */
 (function () {
@@ -19111,7 +19151,7 @@ function onInput() {
   if (!src.trim()) { preview.innerHTML = '<span class="eh-hint">Your expression will appear here as you type.</span>'; setGoals(null); return; }
   try {
     var info = EH.classify(src, {});
-    preview.innerHTML = EH.mathml(info.ast);
+    preview.innerHTML = window.Paper && Paper.enabled() && EH.displayText ? '<span class="pp-sheet eh-prevpaper">' + Paper.inline(EH.displayText(info)) + '</span>' : EH.mathml(info.ast);
     preview.classList.remove('eh-bad');
     setGoals(info);
   } catch (e) {
@@ -19188,31 +19228,9 @@ function render(res) {
   var info = res.info, h = [];
   h.push('<div class="eh-result">');
   h.push('<div class="eh-head"><div class="eh-kind">Recognized as <strong>' + esc(res.title || 'expression') + '</strong>' + (res.goal ? ' · ' + esc(goalLabel(res.goal, info)) : '') + '</div>');
-  if (info && info.ast) h.push('<div class="eh-echo">' + EH.mathml(info.ast) + '</div>');
+  if (info && info.ast) h.push('<div class="eh-echo' + (window.Paper ? ' pp-sheet' : '') + '">' + (window.Paper ? Paper.inline(EH.displayText ? EH.displayText(info) : EH.txt(info.ast)) : EH.mathml(info.ast)) + '</div>');
   h.push('</div>');
-  if (res.error) {
-    h.push('<div class="warning eh-err"><strong>Not automated:</strong> ' + esc(res.error) + '</div>');
-  } else {
-    h.push('<div class="eh-answer"><h4>Answer</h4>' + res.answer.map(function (a) { return '<div class="eh-ans-line">' + esc(a) + '</div>'; }).join('') + '</div>');
-    res.notes.forEach(function (n) { h.push('<div class="warning eh-note">' + esc(n) + '</div>'); });
-    if (res.steps.length) {
-      h.push('<h4 class="eh-sub">On paper, step by step</h4><div class="eh-steps">');
-      var n = 0;
-      res.steps.forEach(function (s) {
-        if (!s.note && !s.math) return;
-        n++;
-        h.push('<div class="step"><span class="step-num">' + n + '</span>' + (s.note ? '<span class="eh-step-note">' + esc(s.note).replace(/θ/g, '<span class="st-th">θ</span>') + '</span>' : '') + (s.math ? '<div class="move">' + esc(s.math).replace(/θ/g, '<span class="st-th">θ</span>') + '</div>' : '') + '</div>');
-      });
-      h.push('</div>');
-    }
-    if (res.calc && res.calc.keys && res.calc.keys.indexOf('?') < 0) {
-      h.push('<div class="calc-box"><strong>TI-30XIIS check.</strong> ' + (res.calc.mode ? 'Mode: <kbd>' + esc(res.calc.mode) + '</kbd>. ' : '') + '<span class="keys">' + esc(res.calc.keys + '   →   ' + res.calc.value) + '</span>Match the decimal to your exact answer.</div>');
-    } else if (res.sols && res.sols.some(function (s) { return s.ex && !s.ex.isRational(); })) {
-      var lines = [];
-      res.sols.forEach(function (s) { if (!(s.ex && !s.ex.isRational())) return; try { lines.push(EH.keys(EH.parse(s.text)) + '   →   ' + EH.fmtFloat(+s.f.toFixed(9))); } catch (e) {} });
-      if (lines.length) h.push('<div class="calc-box"><strong>TI-30XIIS: decimal values of the exact answers.</strong><span class="keys">' + esc(lines.join('\n')) + '</span>Substitute a decimal back into the original equation to check it.</div>');
-    }
-  }
+  h.push(window.EHUI ? EHUI.resultCore(res) : '<div class="eh-msg">' + esc((res.answer || []).join('; ') || res.error || '') + '</div>');
   /* links */
   var pages = [], pre = [], used = [], cards = [], tips = [];
   res.topics.forEach(function (t) {
@@ -19257,6 +19275,7 @@ window.EHrun = run;
 })();
 
 </script>
+<script src="js/eh-ui.js"></script>
 <div aria-hidden="true" id="mpg-print-root"></div>
 <script id="mpg-script">
 /* ================= master practice generator: math helpers ================= */
@@ -21416,10 +21435,13 @@ $('#mpg-print').addEventListener('click', function(){
 $('#mpg-download').addEventListener('click', function(){
   var probs = build(); if (!probs) return;
   var css = document.getElementById('mpg-doc-css').textContent;
-  var html = '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>' + esc(state.title || 'Practice Sheet') + ' ' + state.seed + '</title>' +
+  var paperOn = !!(window.Paper && Paper.enabled() && Paper.assets && Paper.assets.css);
+  var bodyHTML = docHTML(probs, /^https?:$/.test(location.protocol) ? location.href.split('#')[0] : 'precalc-prep.html', true);
+  if (paperOn) { bodyHTML = Paper.paperize(bodyHTML); css += Paper.assets.css; }
+  var html = '<!DOCTYPE html>\n<html lang="en"' + (paperOn ? ' class="pp-on"' : '') + '><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>' + esc(state.title || 'Practice Sheet') + ' ' + state.seed + '</title>' +
     '<style>body{margin:0;background:#f4f4f4;font-family:Georgia,"Times New Roman",serif}.move{font-family:"Courier New",monospace;white-space:pre-wrap}' +
     '.mpg-bar{position:sticky;top:0;background:#fff;border-bottom:1px solid #ccc;padding:.5rem;text-align:center}.mpg-bar button{font:inherit;padding:.4rem .9rem}@media print{.mpg-bar{display:none}body{background:#fff}}' + css + '</style></head><body>' +
-    '<div class="mpg-bar"><button onclick="window.print()">Print or save as PDF</button></div>' + docHTML(probs, /^https?:$/.test(location.protocol) ? location.href.split('#')[0] : 'precalc-prep.html', true) + '</body></html>';
+    '<div class="mpg-bar"><button onclick="window.print()">Print or save as PDF</button></div>' + bodyHTML + '</body></html>';
   var name = (state.title || 'practice-sheet').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-' + state.seed + '.html';
   try {
     var blob = new Blob([html], {type:'text/html'}), url = URL.createObjectURL(blob), a = document.createElement('a');
